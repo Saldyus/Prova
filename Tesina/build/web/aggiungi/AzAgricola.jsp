@@ -103,20 +103,20 @@
                 quota = document.getElementById('quota').value;
                 mappale = document.getElementById('mappale').value;
                 
-                if(RSociale == ""){
+                if(RSociale === ""){
                     alert("Inserire tutti i campi");
                 }else{
-                    if(CTerra == ""){
+                    if(CTerra === ""){
                         alert("Inserire tutti i campi");
                     }else{
-                        if(anno == ""){
-                            
+                        if(anno === ""){
+                            alert("Inserire tutti i campi");
                         }else{
-                            if(quota == ""){
-                                
+                            if(quota === ""){
+                                alert("Inserire tutti i campi");
                             }else{
-                                if(mappale == ""){
-                                    
+                                if(mappale === ""){
+                                    alert("Inserire tutti i campi");
                                 }else{
                                     $.ajax({
                                         type: 'POST',

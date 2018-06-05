@@ -92,10 +92,10 @@
                 RSociale = document.getElementById('RSociale').value;
                 CLiquami = document.getElementById('CLiquami').value;
                 
-                if(RSociale == ""){
+                if(RSociale === ""){
                     alert("Inserire tutti i campi");
                 }else{
-                    if(CLiquami == ""){
+                    if(CLiquami === ""){
                         alert("Inserire tutti i campi");
                     }else{
                         $.ajax({

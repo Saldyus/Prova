@@ -8,7 +8,6 @@ package servletInsert;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -23,10 +22,10 @@ import javax.sql.DataSource;
 
 /**
  *
- * @author Salvatore Dinaro
+ * @author salva
  */
-@WebServlet(name = "AddSeminaServlet", urlPatterns = {"/AddSeminaServlet"})
-public class AddSeminaServlet extends HttpServlet {
+@WebServlet(name = "AddCampoServlet", urlPatterns = {"/AddCampoServlet"})
+public class AddCampoServlet extends HttpServlet {
 
     @Resource(name = "java:app/jdbc/TesinaR")
     private DataSource dataSource;
@@ -58,45 +57,33 @@ public class AddSeminaServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String varieta = request.getParameter("varieta");
-        String coltura = request.getParameter("coltura");
-        String m1_3_s = request.getParameter("m1_3");
-        String m1_2_s = request.getParameter("m1_2");
-        String m2_3_s = request.getParameter("m2_3");
-        String p_m2_s = request.getParameter("pm2");
-        String note_m = request.getParameter("nmat");
-        String note_s = request.getParameter("nsem");
-        String data_s = request.getParameter("data");
-        String campo = request.getParameter("campo");
+        String nome = request.getParameter("nome");
+        String zona = request.getParameter("zona");
+        String upa_s = request.getParameter("upa");
+        String superficie_s = request.getParameter("superficie");
+        String ID_s = request.getParameter("ID");
         
-        Date m1_3 = Date.valueOf(m1_3_s);        
-        Date m1_2 = Date.valueOf(m1_2_s);        
-        Date m2_3 = Date.valueOf(m2_3_s);        
-        Date data = Date.valueOf(data_s);
-        
-        double p_m2 = Double.valueOf(p_m2_s);
+        int upa = Integer.valueOf(upa_s);
+        double superficie = Double.valueOf(superficie_s);
+        int ID = Integer.valueOf(ID_s);
         
         try {
             Connection c = dataSource.getConnection();
-            PreparedStatement ps = c.prepareStatement("INSERT INTO semina(varieta, coltura, maturazione1_3, maturazione1_2, maturazione2_3, p_m2, note_m, note_s) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            ps.setString(1, varieta);
-            ps.setString(2, coltura);
-            ps.setDate(3, m1_3);
-            ps.setDate(4, m1_2);
-            ps.setDate(5, m2_3);
-            ps.setDouble(6, p_m2);
-            ps.setString(7, note_m);
-            ps.setString(8, note_s);
+            PreparedStatement ps = c.prepareStatement("INSERT INTO campo VALUES (?, ?, ?, ?)");
+            ps.setString(1, nome);
+            ps.setString(2, zona);
+            ps.setInt(3, upa);
+            ps.setDouble(4, superficie);
             ps.executeUpdate();
-            ps = c.prepareStatement("INSERT INTO seminato VALUES (?, ?, ?, ?)");
-            ps.setString(1, campo);
-            ps.setString(2, varieta);
-            ps.setString(3, coltura);
-            ps.setDate(4, data);
+            ps = c.prepareStatement("INSERT INTO formano VALUES (?, ?)");
+            ps.setInt(1, ID);
+            ps.setString(2, nome);
+            ps.executeUpdate();
             c.close();
         } catch (SQLException ex) {
-            Logger.getLogger(AddSeminaServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddCampoServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
     /**

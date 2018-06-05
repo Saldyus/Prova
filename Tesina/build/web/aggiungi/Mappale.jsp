@@ -121,25 +121,25 @@
                 Diossina = document.getElementById('Diossina').checked;
                 foglio = document.getElementById('foglio').value;
                 
-                if(comune == ""){
+                if(comune === ""){
                     alert("Inserire tutti i campi");
                 }else{
-                    if(scatastale == ""){
+                    if(scatastale === ""){
                         alert("Inserire tutti i campi");
                     }else{
-                        if(ID == ""){
+                        if(ID === ""){
                             alert("Inserire tutti i campi");
                         }else{
-                            if(ragrario == ""){
+                            if(ragrario === ""){
                                 alert("Inserire tutti i campi");
                             }else{
-                                if(rdomenicale == ""){
+                                if(rdomenicale === ""){
                                     alert("Inserire tutti i campi");
                                 }else{
-                                    if(rsociale == ""){
+                                    if(rsociale === ""){
                                         alert("Inserire tutti i campi");
                                     }else{
-                                        if(foglio == ""){
+                                        if(foglio === ""){
                                             alert("Inserire tutti i campi");
                                         }else{
                                             $.ajax({

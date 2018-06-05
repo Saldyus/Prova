@@ -10,7 +10,9 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
@@ -23,10 +25,10 @@ import javax.sql.DataSource;
 
 /**
  *
- * @author Salvatore Dinaro
+ * @author salva
  */
-@WebServlet(name = "AddSeminaServlet", urlPatterns = {"/AddSeminaServlet"})
-public class AddSeminaServlet extends HttpServlet {
+@WebServlet(name = "AddAnalisiServlet", urlPatterns = {"/AddAnalisiServlet"})
+public class AddAnalisiServlet extends HttpServlet {
 
     @Resource(name = "java:app/jdbc/TesinaR")
     private DataSource dataSource;
@@ -58,45 +60,59 @@ public class AddSeminaServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String varieta = request.getParameter("varieta");
-        String coltura = request.getParameter("coltura");
-        String m1_3_s = request.getParameter("m1_3");
-        String m1_2_s = request.getParameter("m1_2");
-        String m2_3_s = request.getParameter("m2_3");
-        String p_m2_s = request.getParameter("pm2");
-        String note_m = request.getParameter("nmat");
-        String note_s = request.getParameter("nsem");
-        String data_s = request.getParameter("data");
         String campo = request.getParameter("campo");
+        String data_s = request.getParameter("data");
+        String pdf = request.getParameter("pdf");
+        String SO_s = request.getParameter("SO");
+        String Ntot_s = request.getParameter("Ntot");
+        String P2o5_s = request.getParameter("P2o5");
+        String K2O_s = request.getParameter("K2O");
+        String CN_s = request.getParameter("CN");
+        String Sabbia_s = request.getParameter("sabbia");
+        String Limo_s = request.getParameter("limo");
+        String Argilla_s = request.getParameter("argilla");
         
-        Date m1_3 = Date.valueOf(m1_3_s);        
-        Date m1_2 = Date.valueOf(m1_2_s);        
-        Date m2_3 = Date.valueOf(m2_3_s);        
         Date data = Date.valueOf(data_s);
-        
-        double p_m2 = Double.valueOf(p_m2_s);
+        double SO = Double.valueOf(SO_s);
+        int Ntot = Integer.valueOf(Ntot_s);
+        int P2o5 = Integer.valueOf(P2o5_s);
+        int K2O = Integer.valueOf(K2O_s);
+        int CN = Integer.valueOf(CN_s);
+        int Sabbia = Integer.valueOf(Sabbia_s);
+        int Limo = Integer.valueOf(Limo_s);
+        int Argilla = Integer.valueOf(Argilla_s);
         
         try {
             Connection c = dataSource.getConnection();
-            PreparedStatement ps = c.prepareStatement("INSERT INTO semina(varieta, coltura, maturazione1_3, maturazione1_2, maturazione2_3, p_m2, note_m, note_s) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            ps.setString(1, varieta);
-            ps.setString(2, coltura);
-            ps.setDate(3, m1_3);
-            ps.setDate(4, m1_2);
-            ps.setDate(5, m2_3);
-            ps.setDouble(6, p_m2);
-            ps.setString(7, note_m);
-            ps.setString(8, note_s);
+            PreparedStatement ps = c.prepareStatement("INSERT INTO analisi VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            ps.setString(1, pdf);
+            ps.setInt(2, Argilla);
+            ps.setDouble(3, SO);
+            ps.setInt(4, Limo);
+            ps.setInt(5, K2O);
+            ps.setInt(6, CN);
+            ps.setInt(7, Sabbia);
+            ps.setInt(8, P2o5);
+            ps.setInt(9, Ntot);
             ps.executeUpdate();
-            ps = c.prepareStatement("INSERT INTO seminato VALUES (?, ?, ?, ?)");
+            
+            Statement st = c.createStatement();
+            ResultSet rs = st.executeQuery("SELECT ID_Analisi FROM analisi ORDER BY ID_Analisi DESC");
+            rs.next();
+            int ID_A = rs.getInt("ID_Analisi");
+            
+            ps = c.prepareStatement("INSERT INTO analizzato VALUES (?, ?, ?)");
             ps.setString(1, campo);
-            ps.setString(2, varieta);
-            ps.setString(3, coltura);
-            ps.setDate(4, data);
+            ps.setInt(2, ID_A);
+            ps.setDate(3, data);
+            ps.executeUpdate();
+            
             c.close();
+            
         } catch (SQLException ex) {
-            Logger.getLogger(AddSeminaServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddAnalisiServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
     /**

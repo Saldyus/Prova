@@ -8,9 +8,10 @@ package servletInsert;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
@@ -23,10 +24,10 @@ import javax.sql.DataSource;
 
 /**
  *
- * @author Salvatore Dinaro
+ * @author salva
  */
-@WebServlet(name = "AddSeminaServlet", urlPatterns = {"/AddSeminaServlet"})
-public class AddSeminaServlet extends HttpServlet {
+@WebServlet(name = "AddPianificazioneServlet", urlPatterns = {"/AddPianificazioneServlet"})
+public class AddPianificazioneServlet extends HttpServlet {
 
     @Resource(name = "java:app/jdbc/TesinaR")
     private DataSource dataSource;
@@ -58,45 +59,49 @@ public class AddSeminaServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String varieta = request.getParameter("varieta");
-        String coltura = request.getParameter("coltura");
-        String m1_3_s = request.getParameter("m1_3");
-        String m1_2_s = request.getParameter("m1_2");
-        String m2_3_s = request.getParameter("m2_3");
-        String p_m2_s = request.getParameter("pm2");
-        String note_m = request.getParameter("nmat");
-        String note_s = request.getParameter("nsem");
-        String data_s = request.getParameter("data");
-        String campo = request.getParameter("campo");
+        String ID_s = request.getParameter("ID");
+        String rot1 = request.getParameter("rot1");
+        String sup_rot1_s = request.getParameter("sup_rot1");
+        String rot2 = request.getParameter("rot2");
+        String sup_rot2_s = request.getParameter("sup_rot2");
+        String rot3 = request.getParameter("rot3");
+        String sup_rot3_s = request.getParameter("sup_rot3");
+        String anno_s = request.getParameter("anno");
         
-        Date m1_3 = Date.valueOf(m1_3_s);        
-        Date m1_2 = Date.valueOf(m1_2_s);        
-        Date m2_3 = Date.valueOf(m2_3_s);        
-        Date data = Date.valueOf(data_s);
-        
-        double p_m2 = Double.valueOf(p_m2_s);
+        int ID = Integer.valueOf(ID_s);
+        double sup_rot1 = Double.valueOf(sup_rot1_s);
+        double sup_rot2 = Double.valueOf(sup_rot2_s);
+        double sup_rot3 = Double.valueOf(sup_rot3_s);
+        int anno = Integer.valueOf(anno_s);
         
         try {
             Connection c = dataSource.getConnection();
-            PreparedStatement ps = c.prepareStatement("INSERT INTO semina(varieta, coltura, maturazione1_3, maturazione1_2, maturazione2_3, p_m2, note_m, note_s) VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-            ps.setString(1, varieta);
-            ps.setString(2, coltura);
-            ps.setDate(3, m1_3);
-            ps.setDate(4, m1_2);
-            ps.setDate(5, m2_3);
-            ps.setDouble(6, p_m2);
-            ps.setString(7, note_m);
-            ps.setString(8, note_s);
+            PreparedStatement ps = c.prepareStatement("INSERT INTO pianificazioni VALUES (?, ?, ?, ?, ?, ?)");
+            ps.setString(1, rot1);
+            ps.setDouble(2, sup_rot1);
+            ps.setString(3, rot2);
+            ps.setDouble(4, sup_rot2);
+            ps.setString(5, rot3);
+            ps.setDouble(6, sup_rot3);
             ps.executeUpdate();
-            ps = c.prepareStatement("INSERT INTO seminato VALUES (?, ?, ?, ?)");
-            ps.setString(1, campo);
-            ps.setString(2, varieta);
-            ps.setString(3, coltura);
-            ps.setDate(4, data);
+            
+            Statement st = c.createStatement();
+            ResultSet rs = st.executeQuery("SELECT ID_Pianificazione FROM pianificazioni ORDER BY ID_Pianificazione DESC");
+            rs.next();
+            int ID_P = rs.getInt("ID_Pianificazione");
+            
+            ps = c.prepareStatement("INSERT INTO subisce VALUES (?, ?, ?)");
+            ps.setInt(1, ID);
+            ps.setInt(2, ID_P);
+            ps.setInt(3, anno);
+            ps.executeUpdate();
+            
             c.close();
+            
         } catch (SQLException ex) {
-            Logger.getLogger(AddSeminaServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddPianificazioneServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
     }
 
     /**

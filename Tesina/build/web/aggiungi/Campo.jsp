@@ -45,23 +45,26 @@
                     <table class="table table-hover" id="worked">
                         <thead>
                             <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
-                                <th>Telephone</th>
+                                <th>Nome</th>
+                                <th>Zona</th>
+                                <th>UPA</th>
+                                <th>Superficie</th>
+                                <th>Mappale</th>
                                 <th><button type="button" class="btn btn-blue" onclick="indietro()">Indietro</button></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><input class="form-control" type="text"></td>
-                                <td><input class="form-control" type="text"></td>
-                                <td><input class="form-control" type="text"></td>
-                                <td><input class="form-control" type="text"></td>
+                                <td><input class="form-control" type="text" id="nome"></td>
+                                <td><input class="form-control" type="text" id="zona"></td>
+                                <td><input class="form-control" type="text" id="upa"></td>
+                                <td><input class="form-control" type="text" id="superficie"></td>
+                                <td><input class="form-control" type="text" id="id"></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -87,7 +90,51 @@
         <script src="../assets/js/util.js"></script>
         <script src="../assets/js/main.js"></script>
         <script src="../assets/js/grid.js"></script>
-
-
+        <script type="text/javascript">
+            function indietro(){
+                window.location.href = "../Aggiungi.html";
+            }
+            
+            function aggiungi(){
+                
+                nome = document.getElementById('nome').value;
+                zona = document.getElementById('zona').value;
+                upa = document.getElementById('upa').value;
+                superficie = document.getElementById('superficie').value;
+                mappale = document.getElementById('mappale').value;
+                
+                if(nome === ""){
+                    alert("Inserire tutti i campi");
+                }else{
+                    if(zona === ""){
+                        alert("Inserire tutti i campi");
+                    }else{
+                        if(upa === ""){
+                            alert("Inserire tutti i campi");
+                        }else{
+                            if(superficie === ""){
+                                alert("Inserire tutti i campi");
+                            }else{
+                                if(mappale === ""){
+                                    alert("Inserire tutti i campi");
+                                }else{
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: "${pageContext.request.contextPath}/AddCampoServlet",
+                                        data: "nome="+nome+"&zona="+zona+"&upa="+upa+"&superficie="+superficie+"&ID="+mappale,
+                                        success: function (risposta){
+                                            window.location.href = "../Aggiungi.html";
+                                        },
+                                        error: function () {
+                                            alert("Chiamata fallita!!!");
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
     </body>
 </html>

@@ -99,16 +99,16 @@
                 ID = document.getElementById('mappale').value;
                 quota = document.getElementById('quota').value;
                 
-                if(nome == ""){
+                if(nome === ""){
                     alert("Aggiungere tutti i campi");
                 }else{
-                    if(anno == ""){
+                    if(anno === ""){
                         alert("Aggiungere tutti i campi");
                     }else{
-                        if(ID == ""){
+                        if(ID === ""){
                             alert("Aggiungere tutti i campi");
                         }else{
-                            if(quota == ""){
+                            if(quota === ""){
                                 alert("Aggiungere tutti i campi");
                             }else{
                                 $.ajax({

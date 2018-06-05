@@ -53,7 +53,8 @@
                                 <th>p/m^2</th>
                                 <th>Note maturazione</th>
                                 <th>Note semina</th>
-                                <th>Data fioritura (yyyy/mm/gg)</th>
+                                <th>Data seminazione (yyyy/mm/gg)</th>
+                                <th>Campo seminato</th>
                                 <th><button type="button" class="btn btn-blue" onclick="indietro()">Indietro</button></th>
                             </tr>
                         </thead>
@@ -68,10 +69,12 @@
                                 <td><textarea rows="1" id="Nmaturazione"></textarea></td>
                                 <td><textarea rows="1" id="Nsemina"></textarea></td>
                                 <td><input class="form-control" type="text" id="data" placeholder="yyyy/mm/gg"></td>
+                                <td><input class="form-control" type="text" id="campo"></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -118,6 +121,7 @@
                 nmat = document.getElementById('Nmaturazione').value;
                 nsem = document.getElementById('Nsemina').value;
                 data = document.getElementById('data').value;
+                campo = document.getElementById('campo').value;
                 
                 if(varieta === ""){
                     alert("Inserire tutti i campi");
@@ -146,17 +150,21 @@
                                                 if(data === ""){
                                                     alert("Inserire tutti i campi");
                                                 }else{
-                                                    $.ajax({
-                                                        type: 'POST',
-                                                        url: "${pageContext.request.contextPath}/AddSemicaServlet",
-                                                        data: "varieta="+varieta+"&coltura="+coltura+"&m1_3="+m1_3+"&m1_2="+m1_2+"&m2_3="+m2_3+"&pm2="+pm2+"&nmat="+nmat+"&nsem="+nsem+"&data="+data,
-                                                        success: function (risposta){
-                                                            window.location.href = "../Aggiungi.html";
-                                                        },
-                                                        error: function () {
-                                                            alert("Chiamata fallita!!!");
-                                                        }
-                                                    });
+                                                    if(campo === ""){
+                                                        alert("Inserire tutti i campi");
+                                                    }else{
+                                                        $.ajax({
+                                                            type: 'POST',
+                                                            url: "${pageContext.request.contextPath}/AddSemicaServlet",
+                                                            data: "varieta="+varieta+"&coltura="+coltura+"&m1_3="+m1_3+"&m1_2="+m1_2+"&m2_3="+m2_3+"&pm2="+pm2+"&nmat="+nmat+"&nsem="+nsem+"&data="+data+"&campo="+campo,
+                                                            success: function (risposta){
+                                                                window.location.href = "../Aggiungi.html";
+                                                            },
+                                                            error: function () {
+                                                                alert("Chiamata fallita!!!");
+                                                            }
+                                                        });
+                                                    }
                                                 }
                                             }
                                         }

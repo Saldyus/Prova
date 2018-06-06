@@ -45,23 +45,38 @@
                     <table class="table table-hover" id="worked">
                         <thead>
                             <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
-                                <th>Telephone</th>
+                                <th>Campo</th>
+                                <th>Fitofarmaco</th>
+                                <th>Superficie ha</th>
+                                <th>Quantità usata L/Kg</th>
+                                <th>Avversità</th>
+                                <th>Firma</th>
+                                <th>Nome di chi ha effettuato il trattamento</th>
+                                <th>Data</th>
+                                <th>Note</th>
                                 <th><button type="button" class="btn btn-blue" onclick="indietro()">Indietro</button></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><input class="form-control" type="text"></td>
-                                <td><input class="form-control" type="text"></td>
-                                <td><input class="form-control" type="text"></td>
-                                <td><input class="form-control" type="text"></td>
+                                <td><input class="form-control" type="text" id="campo"></td>
+                                <td><input class="form-control" type="text" id="fitofarmaco"></td>
+                                <td><input class="form-control" type="text" id="superficie"></td>
+                                <td><input class="form-control" type="text" id="lkg"></td>
+                                <td><input class="form-control" type="text" id="avversita"></td>
+                                <td><input class="form-control" type="text" id="firma"></td>
+                                <td><input class="form-control" type="text" id="operatore"></td>
+                                <td><input class="form-control" type="text" id="data"></td>
+                                <td><input class="form-control" type="text" id="note"></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -87,7 +102,71 @@
         <script src="../assets/js/util.js"></script>
         <script src="../assets/js/main.js"></script>
         <script src="../assets/js/grid.js"></script>
-
-
+        <script type="text/javascript">
+            function indietro(){
+                window.location.href = "../Aggiungi.html";
+            }
+            
+            function aggiungi(){
+                
+                campo = document.getElementById('campo').value;
+                fitofarmaco = document.getElementById('fitofarmaco').value;
+                lkg = document.getElementById('lkg').value;
+                superficie = document.getElementById('superficie').value;
+                avversita = document.getElementById('avversita').value;
+                firma = document.getElementById('firma').value;
+                operatore = document.getElementById('operatore').value;
+                data = document.getElementById('data').value;
+                note = document.getElementById('note').value;
+                
+                if(campo === ""){
+                    alert("Inserire tutti i campi");
+                }else{
+                    if(fitofarmaco === ""){
+                        alert("Inserire tutti i campi");
+                    }else{
+                        if(lkg === ""){
+                            alert("Inserire tutti i campi");
+                        }else{
+                            if(superficie === ""){
+                                alert("Inserire tutti i campi");
+                            }else{
+                                if(avversita === ""){
+                                    alert("Inserire tutti i campi");
+                                }else{
+                                    if(firma === ""){
+                                        alert("Inserire tutti i campi");
+                                    }else{
+                                        if(operatore === ""){
+                                            alert("Inserire tutti i campi");
+                                        }else{
+                                            if(data === ""){
+                                                alert("Inserire tutti i campi");
+                                            }else{
+                                                if(note === ""){
+                                                    alert("Inserire tutti i campi");
+                                                }else{
+                                                    $.ajax({
+                                                        type: 'POST',
+                                                        url: "${pageContext.request.contextPath}/AddCampoServlet",
+                                                        data: "campo="+campo+"&fitofarmaco="+fitofarmaco+"&lkg="+lkg+"&superficie="+superficie+"&avversita="+avversita+"&firma="+firma+"&operatore="+operatore+"&data="+data+"&note="+note,
+                                                        success: function (risposta){
+                                                            window.location.href = "../Aggiungi.html";
+                                                        },
+                                                        error: function () {
+                                                            alert("Chiamata fallita!!!");
+                                                        }
+                                                    });
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
     </body>
 </html>

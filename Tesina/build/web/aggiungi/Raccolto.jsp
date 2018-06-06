@@ -45,23 +45,35 @@
                     <table class="table table-hover" id="worked">
                         <thead>
                             <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
-                                <th>Telephone</th>
+                                <th>Campo</th>
+                                <th>Data</th>
+                                <th>Ordine</th>
+                                <th>Coltura</th>
+                                <th>Superficie Pio</th>
+                                <th>Gli verde</th>
+                                <th>Umidita raccolta</th>
+                                <th>Stoccaggio</th>
                                 <th><button type="button" class="btn btn-blue" onclick="indietro()">Indietro</button></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><input class="form-control" type="text"></td>
-                                <td><input class="form-control" type="text"></td>
-                                <td><input class="form-control" type="text"></td>
-                                <td><input class="form-control" type="text"></td>
+                                <td><input class="form-control" type="text" id="campo"></td>
+                                <td><input class="form-control" type="text" id="data"></td>
+                                <td><input class="form-control" type="text" id="ordine"></td>
+                                <td><input class="form-control" type="text" id="coltura"></td>
+                                <td><input class="form-control" type="text" id="superficie"></td>
+                                <td><input class="form-control" type="text" id="gli"></td>
+                                <td><input class="form-control" type="text" id="umi"></td>
+                                <td><input class="form-control" type="text" id="stoccaggio"></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -87,7 +99,66 @@
         <script src="../assets/js/util.js"></script>
         <script src="../assets/js/main.js"></script>
         <script src="../assets/js/grid.js"></script>
-
-
+        <script type="text/javascript">
+            function indietro(){
+                window.location.href = "../Aggiungi.html";
+            }
+            
+            function aggiungi(){
+                
+                campo = document.getElementById('campo').value;
+                data = document.getElementById('data').value;
+                ordine = document.getElementById('ordine').value;
+                coltura = document.getElementById('coltura').value;
+                superficie = document.getElementById('superficie').value;
+                gli = document.getElementById('gli').value;
+                umi = document.getElementById('umi').value;
+                stoccaggio = document.getElementById('stoccaggio').value;
+                
+                if(campo === ""){
+                    alert("Inserire tutti i campi");
+                }else{
+                    if(data === ""){
+                        alert("Inserire tutti i campi");
+                    }else{
+                        if(ordine === ""){
+                            alert("Inserire tutti i campi");
+                        }else{
+                            if(coltura === ""){
+                                alert("Inserire tutti i campi");
+                            }else{
+                                if(superficie === ""){
+                                    alert("Inserire tutti i campi");
+                                }else{
+                                    if(gli === ""){
+                                        alert("Inserire tutti i campi");
+                                    }else{
+                                        if(umi === ""){
+                                            alert("Inserire tutti i campi");
+                                        }else{
+                                            if(stoccaggio === ""){
+                                                alert("Inserire tutti i campi");
+                                            }else{
+                                                $.ajax({
+                                                    type: 'POST',
+                                                    url: "${pageContext.request.contextPath}/AddRaccoltoServlet",
+                                                    data: "campo="+campo+"&data="+data+"&ordine="+ordine+"&superficie="+superficie+"&coltura="+coltura+"&gli="+gli+"&umidita="+umi+"&stocaggio="+stocaggio,
+                                                    success: function (risposta){
+                                                        window.location.href = "../Aggiungi.html";
+                                                    },
+                                                    error: function () {
+                                                        alert("Chiamata fallita!!!");
+                                                    }
+                                                });
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
     </body>
 </html>

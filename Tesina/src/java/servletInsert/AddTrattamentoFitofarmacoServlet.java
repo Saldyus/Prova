@@ -58,15 +58,15 @@ public class AddTrattamentoFitofarmacoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String campo = request.getParameter("");
-        String fitofarmaco = request.getParameter("");
-        String lkg_s = request.getParameter("");
-        String superficie_s = request.getParameter("");
-        String avversita = request.getParameter("");
-        String firma = request.getParameter("");
-        String operatore = request.getParameter("");
-        String data_s = request.getParameter("");
-        String note = request.getParameter("");
+        String campo = request.getParameter("campo");
+        String fitofarmaco = request.getParameter("fitofarmaco");
+        String lkg_s = request.getParameter("lkg");
+        String superficie_s = request.getParameter("superficie");
+        String avversita = request.getParameter("avversita");
+        String firma = request.getParameter("firma");
+        String operatore = request.getParameter("operatore");
+        String data_s = request.getParameter("data");
+        String note = request.getParameter("note");
         
         double superficie = Double.valueOf(superficie_s);
         int lkg = Integer.valueOf(lkg_s);

@@ -45,23 +45,32 @@
                     <table class="table table-hover" id="worked">
                         <thead>
                             <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
-                                <th>Telephone</th>
+                                <th>Nome prodotto</th>
+                                <th>pdf etichetta</th>
+                                <th>pdf scheda sicurezza</th>
+                                <th>Principio attivo 1</th>
+                                <th>% Principio attivo 1</th>
+                                <th>Principio attivo 2</th>
+                                <th>% Principio attivo 2</th>
                                 <th><button type="button" class="btn btn-blue" onclick="indietro()">Indietro</button></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><input class="form-control" type="text"></td>
-                                <td><input class="form-control" type="text"></td>
-                                <td><input class="form-control" type="text"></td>
-                                <td><input class="form-control" type="text"></td>
+                                <td><input class="form-control" type="text" id="nome"></td>
+                                <td><input class="form-control" type="text" id="pdf_et"></td>
+                                <td><input class="form-control" type="text" id="pdf_ss"></td>
+                                <td><input class="form-control" type="text" id="pa1"></td>
+                                <td><input class="form-control" type="text" id="pa1_p"></td>
+                                <td><input class="form-control" type="text" id="pa2"></td>
+                                <td><input class="form-control" type="text" id="pa2_p"></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -87,7 +96,61 @@
         <script src="../assets/js/util.js"></script>
         <script src="../assets/js/main.js"></script>
         <script src="../assets/js/grid.js"></script>
-
-
+        <script type="text/javascript">
+            function indietro(){
+                window.location.href = "../Aggiungi.html";
+            }
+            
+            function aggiungi(){
+                
+                nome = document.getElementById('nome').value;
+                pdf_et = document.getElementById('pdf_et').value;
+                pdf_ss = document.getElementById('pdf_ss').value;
+                pa1 = document.getElementById('pa1').value;
+                pa1_p = document.getElementById('pa1_p').value;
+                pa2 = document.getElementById('pa2').value;
+                pa2_p = document.getElementById('pa2_p').value;
+                
+                if(nome === ""){
+                    alert("Inserire tutti i campi");
+                }else{
+                    if(pdf_et === ""){
+                        alert("Inserire tutti i campi");
+                    }else{
+                        if(pdf_ss === ""){
+                            alert("Inserire tutti i campi");
+                        }else{
+                            if(pa1 === ""){
+                                alert("Inserire tutti i campi");
+                            }else{
+                                if(pa1_p === ""){
+                                    alert("Inserire tutti i campi");
+                                }else{
+                                    if(pa2 === ""){
+                                        alert("Inserire tutti i campi");
+                                    }else{
+                                        if(pa2_p === ""){
+                                            alert("Inserire tutti i campi");s
+                                        }else{
+                                            $.ajax({
+                                                type: 'POST',
+                                                url: "${pageContext.request.contextPath}/AddLavorazioneServlet",
+                                                data: "campo="+campo+"&lavorazione="+lavorazione+"&attrezzatura="+attrezzatura+"&data="+data+"&note="+note,
+                                                success: function (risposta){
+                                                    window.location.href = "../Aggiungi.html";
+                                                },
+                                                error: function () {
+                                                    alert("Chiamata fallita!!!");
+                                                }
+                                            });
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
     </body>
 </html>

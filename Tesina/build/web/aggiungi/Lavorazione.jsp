@@ -45,23 +45,26 @@
                     <table class="table table-hover" id="worked">
                         <thead>
                             <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
-                                <th>Telephone</th>
+                                <th>Campo</th>
+                                <th>Tipo lavorazione</th>
+                                <th>Attrezzatura</th>
+                                <th>Data lavorazione</th>
+                                <th>Note</th>
                                 <th><button type="button" class="btn btn-blue" onclick="indietro()">Indietro</button></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><input class="form-control" type="text"></td>
-                                <td><input class="form-control" type="text"></td>
-                                <td><input class="form-control" type="text"></td>
-                                <td><input class="form-control" type="text"></td>
+                                <td><input class="form-control" type="text" id="campo"></td>
+                                <td><input class="form-control" type="text" id="lavorazione"></td>
+                                <td><input class="form-control" type="text" id="attrezzatura"></td>
+                                <td><input class="form-control" type="text" id="data"></td>
+                                <td><textarea class="form-control" rows="1" id="note"></textarea></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -87,7 +90,51 @@
         <script src="../assets/js/util.js"></script>
         <script src="../assets/js/main.js"></script>
         <script src="../assets/js/grid.js"></script>
-
-
+        <script type="text/javascript">
+            function indietro(){
+                window.location.href = "../Aggiungi.html";
+            }
+            
+            function aggiungi(){
+                
+                campo = document.getElementById('campo').value;
+                lavorazione = document.getElementById('lavorazione').value;
+                attrezzatura = document.getElementById('attrezzatura').value;
+                data = document.getElementById('data').value;
+                note = document.getElementById('note').value;
+                
+                if(campo === ""){
+                    alert("Inserire tutti i campi");
+                }else{
+                    if(lavorazione === ""){
+                        alert("Inserire tutti i campi");
+                    }else{
+                        if(attrezzatura === ""){
+                            alert("Inserire tutti i campi");
+                        }else{
+                            if(data === ""){
+                                alert("Inserire tutti i campi");
+                            }else{
+                                if(note === ""){
+                                    alert("Inserire tutti i campi");
+                                }else{
+                                    $.ajax({
+                                        type: 'POST',
+                                        url: "${pageContext.request.contextPath}/AddLavorazioneServlet",
+                                        data: "campo="+campo+"&lavorazione="+lavorazione+"&attrezzatura="+attrezzatura+"&data="+data+"&note="+note,
+                                        success: function (risposta){
+                                            window.location.href = "../Aggiungi.html";
+                                        },
+                                        error: function () {
+                                            alert("Chiamata fallita!!!");
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
     </body>
 </html>

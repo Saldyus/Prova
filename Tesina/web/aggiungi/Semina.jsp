@@ -66,8 +66,8 @@
                                 <td><input class="form-control" type="text" id="maturazione1_2"></td>
                                 <td><input class="form-control" type="text" id="maturazione2_3"></td>
                                 <td><input class="form-control" type="text" id="p_m2"></td>
-                                <td><textarea rows="1" id="Nmaturazione"></textarea></td>
-                                <td><textarea rows="1" id="Nsemina"></textarea></td>
+                                <td><textarea class="form-control" rows="1" id="Nmaturazione"></textarea></td>
+                                <td><textarea class="form-control" rows="1" id="Nsemina"></textarea></td>
                                 <td><input class="form-control" type="text" id="data" placeholder="yyyy/mm/gg"></td>
                                 <td><input class="form-control" type="text" id="campo"></td>
                             </tr>

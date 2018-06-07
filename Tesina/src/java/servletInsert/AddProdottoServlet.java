@@ -7,6 +7,11 @@ package servletInsert;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.annotation.Resource;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -51,6 +56,31 @@ public class AddProdottoServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        String nome = request.getParameter("nome");
+        String tipo = request.getParameter("nome");
+        String titoloN_s = request.getParameter("nome");
+        String titoloP_s = request.getParameter("nome");
+        String titoloK_s = request.getParameter("nome");
+        String note = request.getParameter("nome");
+        String ndes = request.getParameter("nome");
+        String ragione = request.getParameter("nome");
+        String ddt_s = request.getParameter("nome");
+        String data_s = request.getParameter("nome");
+        String lkg_s = request.getParameter("nome");
+        
+        int titoloN = Integer.valueOf(titoloN_s);
+        int titoloP = Integer.valueOf(titoloP_s);
+        int titoloK = Integer.valueOf(titoloK_s);
+        int ddt = Integer.valueOf(ddt_s);
+        int lkg = Integer.valueOf(lkg_s);
+        Date data = Date.valueOf(data_s);
+        
+        try {
+            Connection c = dataSource.getConnection();
+        } catch (SQLException ex) {
+            Logger.getLogger(AddProdottoServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }
 

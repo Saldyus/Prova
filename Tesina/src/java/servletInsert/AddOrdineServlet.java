@@ -8,6 +8,7 @@ package servletInsert;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -22,10 +23,10 @@ import javax.sql.DataSource;
 
 /**
  *
- * @author Salvatore Dinaro
+ * @author salva
  */
-@WebServlet(name = "AddDesProdottoServlet", urlPatterns = {"/AddDesProdottoServlet"})
-public class AddDesProdottoServlet extends HttpServlet {
+@WebServlet(name = "AddOrdineServlet", urlPatterns = {"/AddOrdineServlet"})
+public class AddOrdineServlet extends HttpServlet {
 
     @Resource(name = "java:app/jdbc/TesinaR")
     private DataSource dataSource;
@@ -57,33 +58,28 @@ public class AddDesProdottoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
+        String ragione = request.getParameter("ragione");
         String nome = request.getParameter("nome");
-        String pdf_et = request.getParameter("pdf_et");
-        String pdf_ss = request.getParameter("pdf_ss");
-        String pa1 = request.getParameter("pa1");
-        String pa1_p_s = request.getParameter("pa1_p");
-        String pa2 = request.getParameter("pa2");
-        String pa2_p_s = request.getParameter("pa2_s");
+        String ddt_s = request.getParameter("ddt");
+        String data_s = request.getParameter("data");
+        String lkg_s = request.getParameter("lkg");
         
-        int pa1_p = Integer.valueOf(pa1_p_s);
-        int pa2_p = Integer.valueOf(pa2_p_s);
+        int ddt = Integer.valueOf(ddt_s);
+        int lkg = Integer.valueOf(lkg_s);
+        Date data = Date.valueOf(data_s);
         
         try {
             Connection c = dataSource.getConnection();
-            PreparedStatement ps = c.prepareStatement("INSERT INTO des_prodotti VALUES(?, ?, ?, ?, ?, ?, ?)");
-            ps.setString(1, nome);
-            ps.setString(2, pdf_et);
-            ps.setString(3, pdf_ss);
-            ps.setString(4, pa1);
-            ps.setInt(5, pa1_p);
-            ps.setString(6, pa2);
-            ps.setInt(7, pa2_p);
-            ps.executeUpdate();
+            PreparedStatement ps = c.prepareStatement("INSERT INTO immagazzina VALUES (?, ?, ?, ?, ?)");
+            ps.setString(1, ragione);
+            ps.setString(2, nome);
+            ps.setInt(3, ddt);
+            ps.setDate(4, data);
+            ps.setInt(5, lkg);
             
             c.close();
-            
         } catch (SQLException ex) {
-            Logger.getLogger(AddDesProdottoServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddOrdineServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }

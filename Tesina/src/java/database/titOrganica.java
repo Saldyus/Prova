@@ -27,6 +27,9 @@ public class titOrganica implements Serializable{
     
     @Size(max = 30)
     private String pdf_analisi;
+    
+    @Size(max = 30)
+    private String concime;
 
     /**
      *
@@ -36,14 +39,16 @@ public class titOrganica implements Serializable{
      * @param titoloK
      * @param date
      * @param pdf_analisi
+     * @param concime
      */
-    public titOrganica(int ID_Titolazione, int titoloN, int titoloP, int titoloK, Date date, String pdf_analisi) {
+    public titOrganica(int ID_Titolazione, int titoloN, int titoloP, int titoloK, Date date, String pdf_analisi, String concime) {
         this.ID_Titolazione = ID_Titolazione;
         this.titoloN = titoloN;
         this.titoloP = titoloP;
         this.titoloK = titoloK;
         this.date = date;
         this.pdf_analisi = pdf_analisi;
+        this.concime = concime;
     }
 
     /**
@@ -134,5 +139,19 @@ public class titOrganica implements Serializable{
      */
     public void setPdf_analisi(String pdf_analisi) {
         this.pdf_analisi = pdf_analisi;
+    }
+
+    /**
+     * @return the concime
+     */
+    public String getConcime() {
+        return concime;
+    }
+
+    /**
+     * @param concime the concime to set
+     */
+    public void setConcime(String concime) {
+        this.concime = concime;
     }
 }

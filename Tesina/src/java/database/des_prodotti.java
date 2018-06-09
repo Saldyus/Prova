@@ -14,7 +14,8 @@ import javax.validation.constraints.Size;
  */
 public class des_prodotti implements Serializable{
     
-    private int ID_Descrizione;
+    @Size(max = 50)
+    private String nome_prodotto;
     
     @Size(max = 30)
     private String pdf_etichetta;
@@ -40,7 +41,7 @@ public class des_prodotti implements Serializable{
 
     /**
      *
-     * @param ID_Descrizione
+     * @param nome_prodotto
      * @param pdf_etichetta
      * @param pdf_sicurezza
      * @param PA1
@@ -48,8 +49,8 @@ public class des_prodotti implements Serializable{
      * @param PA2
      * @param PA2_p
      */
-    public des_prodotti(int ID_Descrizione, String pdf_etichetta, String pdf_sicurezza, String PA1, int PA1_p, String PA2, int PA2_p) {
-        this.ID_Descrizione = ID_Descrizione;
+    public des_prodotti(String nome_prodotto, String pdf_etichetta, String pdf_sicurezza, String PA1, int PA1_p, String PA2, int PA2_p) {
+        this.nome_prodotto = nome_prodotto;
         this.pdf_etichetta = pdf_etichetta;
         this.pdf_sicurezza = pdf_sicurezza;
         this.PA1 = PA1;
@@ -61,17 +62,18 @@ public class des_prodotti implements Serializable{
     
     
     /**
-     * @return the ID_Descrizione
+     * @return the nome_prodotto
      */
-    public int getID_Descrizione() {
-        return ID_Descrizione;
+    public String getNome_prodotto() {
+        return nome_prodotto;
     }
 
     /**
-     * @param ID_Descrizione the ID_Descrizione to set
+     * 
+     * @param nome_prodotto the prodotto's name
      */
-    public void setID_Descrizione(int ID_Descrizione) {
-        this.ID_Descrizione = ID_Descrizione;
+    public void setNome_prodotto(String nome_prodotto) {
+        this.nome_prodotto = nome_prodotto;
     }
 
     /**

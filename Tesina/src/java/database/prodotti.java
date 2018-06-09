@@ -22,16 +22,16 @@ public class prodotti implements Serializable{
      * @param titoloK
      * @param titoloP
      * @param note
-     * @param ID_Descrizione
+     * @param nome_prodotto
      */
-    public prodotti(String nome, String tipo_prodotto, int titoloN, int titoloK, int titoloP, String note, int ID_Descrizione) {
+    public prodotti(String nome, String tipo_prodotto, int titoloN, int titoloK, int titoloP, String note, String nome_prodotto) {
         this.nome = nome;
         this.tipo_prodotto = tipo_prodotto;
         this.titoloN = titoloN;
         this.titoloK = titoloK;
         this.titoloP = titoloP;
         this.note = note;
-        this.ID_Descrizione = ID_Descrizione;
+        this.nome_prodotto = nome_prodotto;
     }
 
     /**
@@ -125,17 +125,17 @@ public class prodotti implements Serializable{
     }
 
     /**
-     * @return the ID_Descrizione
+     * @return the nome_prodotto
      */
-    public int getID_Descrizione() {
-        return ID_Descrizione;
+    public String getNome_prodotto() {
+        return nome_prodotto;
     }
 
     /**
-     * @param ID_Descrizione the ID_Descrizione to set
+     * @param nome_prodotto the prodotto's of descriozione name
      */
-    public void setID_Descrizione(int ID_Descrizione) {
-        this.ID_Descrizione = ID_Descrizione;
+    public void setID_Descrizione(String nome_prodotto) {
+        this.nome_prodotto = nome_prodotto;
     }
     
     @Size(max = 50)
@@ -152,5 +152,5 @@ public class prodotti implements Serializable{
     
     private String note;
     
-    private int ID_Descrizione;
+    private String nome_prodotto;
 }

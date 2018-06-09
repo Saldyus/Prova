@@ -8,7 +8,6 @@ package servletInsert;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -23,10 +22,10 @@ import javax.sql.DataSource;
 
 /**
  *
- * @author Salvatore Dinaro
+ * @author salva
  */
-@WebServlet(name = "AddProdottiServlet", urlPatterns = {"/AddProdottiServlet"})
-public class AddProdottoServlet extends HttpServlet {
+@WebServlet(name = "AddDosaggioServlet", urlPatterns = {"/AddDosaggioServlet"})
+public class AddDosaggioServlet extends HttpServlet {
 
     @Resource(name = "java:app/jdbc/TesinaR")
     private DataSource dataSource;
@@ -58,48 +57,24 @@ public class AddProdottoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String nome = request.getParameter("nome");
-        String tipo = request.getParameter("tipo");
-        String titoloN_s = request.getParameter("titoloN");
-        String titoloP_s = request.getParameter("titoloP");
-        String titoloK_s = request.getParameter("titoloK");
-        String note = request.getParameter("note");
-        String ndes = request.getParameter("ndes");
-        String ragione = request.getParameter("ragione");
-        String ddt_s = request.getParameter("sst");
-        String data_s = request.getParameter("data");
-        String lkg_s = request.getParameter("lkg");
+        String prodotto = request.getParameter("prodotto");
+        String coltura = request.getParameter("coltura");
+        String dosaggio_s = request.getParameter("dosaggio");
         
-        int titoloN = Integer.valueOf(titoloN_s);
-        int titoloP = Integer.valueOf(titoloP_s);
-        int titoloK = Integer.valueOf(titoloK_s);
-        int ddt = Integer.valueOf(ddt_s);
-        int lkg = Integer.valueOf(lkg_s);
-        Date data = Date.valueOf(data_s);
+        double dosaggio = Double.valueOf(dosaggio_s);
         
         try {
             Connection c = dataSource.getConnection();
-            PreparedStatement ps = c.prepareStatement("INSERT INTO prodotti VALUES (?, ?, ?, ?, ?, ?, ?)");
-            ps.setString(1, nome);
-            ps.setString(2, tipo);
-            ps.setInt(3, titoloN);
-            ps.setInt(4, titoloK);
-            ps.setInt(5, titoloP);
-            ps.setString(6, note);
-            ps.setString(7, ndes);
+            PreparedStatement ps = c.prepareStatement("INSERT INTO dosaggi VALUES(?, ?, ?)");
+            ps.setString(1, coltura);
+            ps.setDouble(2, dosaggio);
+            ps.setString(3, prodotto);
             ps.executeUpdate();
             
-            ps = c.prepareStatement("INSERT INTO immagazzina VALUES (?, ?, ?, ?, ?)");
-            ps.setString(1, ragione);
-            ps.setString(2, nome);
-            ps.setInt(3, ddt);
-            ps.setDate(4, data);
-            ps.setInt(5, lkg);
-            ps.executeUpdate();
+            c.close();
             
-            c.close();            
         } catch (SQLException ex) {
-            Logger.getLogger(AddProdottoServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddDosaggioServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }

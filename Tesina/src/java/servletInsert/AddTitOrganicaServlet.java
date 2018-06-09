@@ -23,10 +23,10 @@ import javax.sql.DataSource;
 
 /**
  *
- * @author Salvatore Dinaro
+ * @author salva
  */
-@WebServlet(name = "AddProdottiServlet", urlPatterns = {"/AddProdottiServlet"})
-public class AddProdottoServlet extends HttpServlet {
+@WebServlet(name = "AddTitOrganicaServlet", urlPatterns = {"/AddTitOrganicaServlet"})
+public class AddTitOrganicaServlet extends HttpServlet {
 
     @Resource(name = "java:app/jdbc/TesinaR")
     private DataSource dataSource;
@@ -58,48 +58,32 @@ public class AddProdottoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String nome = request.getParameter("nome");
-        String tipo = request.getParameter("tipo");
+        String concime = request.getParameter("concime");
         String titoloN_s = request.getParameter("titoloN");
         String titoloP_s = request.getParameter("titoloP");
         String titoloK_s = request.getParameter("titoloK");
-        String note = request.getParameter("note");
-        String ndes = request.getParameter("ndes");
-        String ragione = request.getParameter("ragione");
-        String ddt_s = request.getParameter("sst");
         String data_s = request.getParameter("data");
-        String lkg_s = request.getParameter("lkg");
+        String pdf = request.getParameter("pdf");
         
         int titoloN = Integer.valueOf(titoloN_s);
         int titoloP = Integer.valueOf(titoloP_s);
         int titoloK = Integer.valueOf(titoloK_s);
-        int ddt = Integer.valueOf(ddt_s);
-        int lkg = Integer.valueOf(lkg_s);
         Date data = Date.valueOf(data_s);
         
         try {
             Connection c = dataSource.getConnection();
-            PreparedStatement ps = c.prepareStatement("INSERT INTO prodotti VALUES (?, ?, ?, ?, ?, ?, ?)");
-            ps.setString(1, nome);
-            ps.setString(2, tipo);
-            ps.setInt(3, titoloN);
-            ps.setInt(4, titoloK);
-            ps.setInt(5, titoloP);
-            ps.setString(6, note);
-            ps.setString(7, ndes);
-            ps.executeUpdate();
-            
-            ps = c.prepareStatement("INSERT INTO immagazzina VALUES (?, ?, ?, ?, ?)");
-            ps.setString(1, ragione);
-            ps.setString(2, nome);
-            ps.setInt(3, ddt);
+            PreparedStatement ps = c.prepareStatement("INSERT INTO titorganica VALUES (?, ?, ?, ?, ?, ?)");
+            ps.setInt(1, titoloN);
+            ps.setInt(2, titoloP);
+            ps.setInt(3, titoloK);
             ps.setDate(4, data);
-            ps.setInt(5, lkg);
+            ps.setString(5, pdf);
+            ps.setString(6, concime);
             ps.executeUpdate();
             
-            c.close();            
+            c.close();
         } catch (SQLException ex) {
-            Logger.getLogger(AddProdottoServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddTitOrganicaServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }

@@ -45,23 +45,29 @@
                     <table class="table table-hover" id="worked">
                         <thead>
                             <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
-                                <th>Telephone</th>
+                                <th>Nome concime</th>
+                                <th>Titolo N</th>
+                                <th>Titolo P</th>
+                                <th>Titolo K</th>
+                                <th>Data</th>
+                                <th>PDF Analisi</th>
                                 <th><button type="button" class="btn btn-blue" onclick="indietro()">Indietro</button></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><input class="form-control" type="text"></td>
-                                <td><input class="form-control" type="text"></td>
-                                <td><input class="form-control" type="text"></td>
-                                <td><input class="form-control" type="text"></td>
+                                <td><input class="form-control" type="text" id="concime"></td>
+                                <td><input class="form-control" type="text" id="titoloN"></td>
+                                <td><input class="form-control" type="text" id="titoloP"></td>
+                                <td><input class="form-control" type="text" id="titoloK"></td>
+                                <td><input class="form-control" type="text" id="data"></td>
+                                <td><input class="form-control" type="text" id="pdf"></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
+                                <td></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -87,7 +93,56 @@
         <script src="../assets/js/util.js"></script>
         <script src="../assets/js/main.js"></script>
         <script src="../assets/js/grid.js"></script>
-
-
+        <script type="text/javascript">
+            function indietro(){
+                window.location.href = "../Aggiungi.html";
+            }
+            
+            function aggiungi(){
+                
+                concime = document.getElementById('concime').value;
+                titoloN = document.getElementById('titoloN').value;
+                titoloP = document.getElementById('titoloP').value;
+                titoloK = document.getElementById('titoloK').value;
+                data = document.getElementById('data').value;
+                pdf = document.getElementById('pdf').value;
+                
+                if(concime === ""){
+                    alert("Inserire tutti i campi");
+                }else{
+                    if(titoloN === ""){
+                        alert("Inserire tutti i campi");
+                    }else{
+                        if(titoloP === ""){
+                            alert("Inserire tutti i campi");
+                        }else{
+                            if(titoloK === ""){
+                                alert("Inserire tutti i campi");
+                            }else{
+                                if(data === ""){
+                                    alert("Inserire tutti i campi");
+                                }else{
+                                    if(pdf === ""){
+                                        alert("Inserire tutti i campi");
+                                    }else{
+                                        $.ajax({
+                                            type: 'POST',
+                                            url: "${pageContext.request.contextPath}/AddTitOrganicaServlet",
+                                            data: "concime="+concime+"&titoloN="+titoloN+"&titoloP="+titoloP+"&titoloK="+titoloK+"&data="+data+"&pdf="+pdf,
+                                            success: function (risposta){
+                                                window.location.href = "../Aggiungi.html";
+                                            },
+                                            error: function () {
+                                                alert("Chiamata fallita!!!");
+                                            }
+                                        });
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
     </body>
 </html>

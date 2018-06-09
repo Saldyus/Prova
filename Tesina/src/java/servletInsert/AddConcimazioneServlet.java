@@ -10,7 +10,9 @@ import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
@@ -23,10 +25,10 @@ import javax.sql.DataSource;
 
 /**
  *
- * @author Salvatore Dinaro
+ * @author salva
  */
-@WebServlet(name = "AddProdottiServlet", urlPatterns = {"/AddProdottiServlet"})
-public class AddProdottoServlet extends HttpServlet {
+@WebServlet(name = "AddConcimazioneServlet", urlPatterns = {"/AddConcimazioneServlet"})
+public class AddConcimazioneServlet extends HttpServlet {
 
     @Resource(name = "java:app/jdbc/TesinaR")
     private DataSource dataSource;
@@ -58,48 +60,35 @@ public class AddProdottoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String nome = request.getParameter("nome");
         String tipo = request.getParameter("tipo");
-        String titoloN_s = request.getParameter("titoloN");
-        String titoloP_s = request.getParameter("titoloP");
-        String titoloK_s = request.getParameter("titoloK");
-        String note = request.getParameter("note");
-        String ndes = request.getParameter("ndes");
-        String ragione = request.getParameter("ragione");
-        String ddt_s = request.getParameter("sst");
+        String qta_s = request.getParameter("qta");
+        String superficie_s = request.getParameter("superficie");
+        String concime = request.getParameter("concime");
         String data_s = request.getParameter("data");
-        String lkg_s = request.getParameter("lkg");
+        String note = request.getParameter("note");
+        String campo = request.getParameter("campo");
         
-        int titoloN = Integer.valueOf(titoloN_s);
-        int titoloP = Integer.valueOf(titoloP_s);
-        int titoloK = Integer.valueOf(titoloK_s);
-        int ddt = Integer.valueOf(ddt_s);
-        int lkg = Integer.valueOf(lkg_s);
+        int qta = Integer.valueOf(qta_s);
+        double superficie = Double.valueOf(superficie_s);
         Date data = Date.valueOf(data_s);
+        int ID = getID(data);
         
         try {
             Connection c = dataSource.getConnection();
-            PreparedStatement ps = c.prepareStatement("INSERT INTO prodotti VALUES (?, ?, ?, ?, ?, ?, ?)");
-            ps.setString(1, nome);
-            ps.setString(2, tipo);
-            ps.setInt(3, titoloN);
-            ps.setInt(4, titoloK);
-            ps.setInt(5, titoloP);
+            PreparedStatement ps = c.prepareStatement("INSERT INTO concimazioni VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
+            ps.setString(1, tipo);
+            ps.setInt(2, qta);
+            ps.setDouble(3, superficie);
+            ps.setString(4, concime);
+            ps.setDate(5, data);
             ps.setString(6, note);
-            ps.setString(7, ndes);
+            ps.setString(7, campo);
+            ps.setInt(8, ID);
             ps.executeUpdate();
             
-            ps = c.prepareStatement("INSERT INTO immagazzina VALUES (?, ?, ?, ?, ?)");
-            ps.setString(1, ragione);
-            ps.setString(2, nome);
-            ps.setInt(3, ddt);
-            ps.setDate(4, data);
-            ps.setInt(5, lkg);
-            ps.executeUpdate();
-            
-            c.close();            
+            c.close();
         } catch (SQLException ex) {
-            Logger.getLogger(AddProdottoServlet.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(AddConcimazioneServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
@@ -113,5 +102,25 @@ public class AddProdottoServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private int getID(Date data_c) {
+        int ID = 0;
+        try {
+            Connection c = dataSource.getConnection();
+            Statement st = c.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * from tesina.titorganica ORDER BY data desc");
+            while(rs.next()){
+                Date data = rs.getDate("data");
+                if(data_c.getTime() >= data.getTime()){
+                    ID = rs.getInt("ID_Titolazione");
+                    break;
+                }
+            }
+            c.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(AddConcimazioneServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return ID;
+    }
 
 }

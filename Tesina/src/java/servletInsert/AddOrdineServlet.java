@@ -76,6 +76,7 @@ public class AddOrdineServlet extends HttpServlet {
             ps.setInt(3, ddt);
             ps.setDate(4, data);
             ps.setInt(5, lkg);
+            ps.executeUpdate();
             
             c.close();
         } catch (SQLException ex) {

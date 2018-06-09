@@ -45,23 +45,32 @@
                     <table class="table table-hover" id="worked">
                         <thead>
                             <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
-                                <th>Telephone</th>
+                                <th>Tipo Concimazione</th>
+                                <th>Quantità usata ton</th>
+                                <th>Supericie ha</th>
+                                <th>Concime</th>
+                                <th>Data</th>
+                                <th>Note</th>
+                                <th>Campo</th>
                                 <th><button type="button" class="btn btn-blue" onclick="indietro()">Indietro</button></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><input class="form-control" type="text"></td>
-                                <td><input class="form-control" type="text"></td>
-                                <td><input class="form-control" type="text"></td>
-                                <td><input class="form-control" type="text"></td>
+                                <td><input class="form-control" type="text" id="tipo"></td>
+                                <td><input class="form-control" type="text" id="qta"></td>
+                                <td><input class="form-control" type="text" id="superficie"></td>
+                                <td><input class="form-control" type="text" id="concime"></td>
+                                <td><input class="form-control" type="text" id="data"></td>
+                                <td><input class="form-control" type="text" id="note"></td>
+                                <td><input class="form-control" type="text" id="campo"></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -87,7 +96,61 @@
         <script src="../assets/js/util.js"></script>
         <script src="../assets/js/main.js"></script>
         <script src="../assets/js/grid.js"></script>
-
-
+        <script type="text/javascript">
+            function indietro(){
+                window.location.href = "../Aggiungi.html";
+            }
+            
+            function aggiungi(){
+                
+                tipo = document.getElementById('tipo').value;
+                qta = document.getElementById('qta').value;
+                superficie = document.getElementById('superficie').value;
+                concime = document.getElementById('concime').value;
+                data = document.getElementById('data').value;
+                note = document.getElementById('note').value;
+                campo = document.getElementById('campo').value;
+                
+                if(tipo === ""){
+                    alert("Inserire tutti i campi");
+                }else{
+                    if(qta === ""){
+                        alert("Inserire tutti i campi");
+                    }else{
+                        if(superficie === ""){
+                            alert("Inserire tutti i campi");
+                        }else{
+                            if(concime === ""){
+                                alert("Inserire tutti i campi");
+                            }else{
+                                if(data === ""){
+                                    alert("Inserire tutti i campi");
+                                }else{
+                                    if(note === ""){
+                                        alert("Inserire tutti i campi");
+                                    }else{
+                                        if(campo === ""){
+                                            alert("Inserire tutti i campi");
+                                        }else{
+                                            $.ajax({
+                                                type: 'POST',
+                                                url: "${pageContext.request.contextPath}/AddConcimazioneServlet",
+                                                data: "tipo="+tipo+"&qta="+qta+"&superficie="+superficie+"&concime="+concime+"&data="+data+"&note="+note+"&campo="+campo,
+                                                success: function (risposta){
+                                                    window.location.href = "../Aggiungi.html";
+                                                },
+                                                error: function () {
+                                                    alert("Chiamata fallita!!!");
+                                                }
+                                            });
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        </script>
     </body>
 </html>

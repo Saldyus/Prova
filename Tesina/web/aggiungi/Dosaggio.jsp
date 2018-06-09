@@ -45,24 +45,21 @@
                     <table class="table table-hover" id="worked">
                         <thead>
                             <tr>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
-                                <th>Telephone</th>
+                                <th>Nome prodotto</th>
+                                <th>Coltura</th>
+                                <th>Dosaggio massimo</th>
                                 <th><button type="button" class="btn btn-blue" onclick="indietro()">Indietro</button></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <td><input class="form-control" type="text"></td>
-                                <td><input class="form-control" type="text"></td>
-                                <td><input class="form-control" type="text"></td>
-                                <td><input class="form-control" type="text"></td>
+                                <td><input class="form-control" type="text" id="prodotto"></td>
+                                <td><input class="form-control" type="text" id="coltura"></td>
+                                <td><input class="form-control" type="text" id="dosaggio"></td>
                             </tr>
                         </tbody>
                         <tfoot>
                             <tr>
-                                <td></td>
                                 <td></td>
                                 <td></td>
                                 <td></td>
@@ -87,7 +84,43 @@
         <script src="../assets/js/util.js"></script>
         <script src="../assets/js/main.js"></script>
         <script src="../assets/js/grid.js"></script>
-
+        <script type="text/javascript">
+    
+            function indietro(){
+                window.location.href = "../Aggiungi.html";
+            }
+            
+            function aggiungi(){
+                
+                prodotto = document.getElementById('prodotto').prodotto;
+                coltura = document.getElementById('coltura').coltura;
+                dosaggio = document.getElementById('dosaggio').dosaggio;
+                
+                if(prodotto === ""){
+                    alert("Inserire tutti i campi");
+                }else{
+                    if(coltura === ""){
+                        alert("Inserire tutti i campi");
+                    }else{
+                        if(dosaggio === ""){
+                            alert("Inserire tutti i campi");
+                        }else{
+                            $.ajax({
+                                type: 'POST',
+                                url: "${pageContext.request.contextPath}/AddDosaggioServlet",
+                                data: "prodotto="+prodotto+"&coltura="+coltura+"&dosaggio="+dosaggio,
+                                success: function (risposta){
+                                    window.location.href = "../Aggiungi.html";
+                                },
+                                error: function () {
+                                    alert("Chiamata fallita!!!");
+                                }
+                            });
+                        }
+                    }
+                }
+            }
+        </script>
 
     </body>
 </html>

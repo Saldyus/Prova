@@ -3,13 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package servletInsert;
+package servletDelete;
 
+import com.google.gson.Gson;
+import database.gTerreno;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.annotation.Resource;
@@ -22,13 +25,14 @@ import javax.sql.DataSource;
 
 /**
  *
- * @author Salvatore Dinaro
+ * @author salva
  */
-@WebServlet(name = "AddProprietarioServlet", urlPatterns = {"/AddProprietarioServlet"})
-public class AddProprietarioServlet extends HttpServlet {
+@WebServlet(name = "DeleteAzAgricolaServlet", urlPatterns = {"/DeleteAzAgricolaServlet"})
+public class DeleteAzAgricolaServlet extends HttpServlet {
 
     @Resource(name = "java:app/jdbc/TesinaR")
     private DataSource dataSource;
+    Gson g;
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -42,7 +46,9 @@ public class AddProprietarioServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        
+        List<gTerreno> azienda = getGTerreno();
+        
     }
 
     /**
@@ -56,32 +62,9 @@ public class AddProprietarioServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        String nome = request.getParameter("nome");
-        String quota_s = request.getParameter("quota");
-        String anno_s = request.getParameter("anno");
-        String ID_Mappale_s = request.getParameter("mappale");
-
-        double quota = Double.valueOf(quota_s);
-        int anno = Integer.valueOf(anno_s);
-        int ID_Mappale = Integer.valueOf(ID_Mappale_s);
-
-        try {
-            Connection c = dataSource.getConnection();
-            PreparedStatement ps = c.prepareStatement("INSERT INTO Proprietari VALUES (?)");
-            ps.setString(1, nome);
-            ps.executeUpdate();
-            ps = c.prepareStatement("INSERT INTO possiede VALUES (?, ?, ?, ?)");
-            ps.setString(1, nome);
-            ps.setInt(2, ID_Mappale);
-            ps.setInt(3, anno);
-            ps.setDouble(4, quota);
-            ps.executeUpdate();
-            c.close();
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(AddProprietarioServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        
+        
+        
     }
 
     /**
@@ -93,5 +76,18 @@ public class AddProprietarioServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
+    private List<gTerreno> getGTerreno() {
+        List<gTerreno> azienda = new ArrayList<>();
+        
+        try {
+            Connection c = dataSource.getConnection();
+            Statement st = c.createStatement();
+        } catch (SQLException ex) {
+            Logger.getLogger(DeleteAzAgricolaServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return azienda;
+    }
 
 }

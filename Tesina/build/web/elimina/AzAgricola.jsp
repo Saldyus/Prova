@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=US-ASCII" pageEncoding="US-ASCII"%>
 <html>
     <head>
         <title>Elimina</title>
@@ -8,16 +9,15 @@
         <meta name="keywords" content="" />
         <link rel="stylesheet" href="../assets/css/main.css" />
     </head>
-
-
-
-
-
     <body class="is-preload" onload="getGTerreno()">
-
+        <%
+            if (session.getAttribute("online") == null) {
+                response.sendRedirect("../Login.jsp");
+            }
+        %> 
         <!-- Header -->
         <header id="header">
-            <a class="logo" href="../Homepage.html">Homepage</a>
+            <a class="logo" href="../Homepage.jsp">Homepage</a>
             <nav>
                 <a href="#menu">Menu</a>
             </nav>
@@ -26,10 +26,11 @@
         <!-- Nav -->
         <nav id="menu">
             <ul class="links">
-                <li><a href="../Aggiungi.html">Aggiungi</a></li>
-                <li><a href="../Elimina.html">Elimina</a></li>
-                <li><a href="../Modifica.html">Modifica</a></li>
-                <li><a href="../Visualizza.html">Visualizza</a></li>
+                <li><a href="../Aggiungi.jsp">Aggiungi</a></li>
+                <li><a href="../Elimina.jsp">Elimina</a></li>
+                <li><a href="../Modifica.jsp">Modifica</a></li>
+                <li><a href="../Visualizza.jsp">Visualizza</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
             </ul>
         </nav>
 
@@ -77,10 +78,24 @@
         <script src="../assets/js/breakpoints.min.js"></script>
         <script src="../assets/js/util.js"></script>
         <script src="../assets/js/main.js"></script>
-        <script src="../assets/js/grid.js"></script>ù
+        <script src="../assets/js/grid.js"></script>?
         <script type="text/javascript">
             function indietro(){
-                window.location.href = "../Elimina.html";
+                window.location.href = "../Elimina.jsp";
+            }
+            
+            function logout(){
+                $.ajax({
+                    type: 'POST',
+                    url: "${pageContext.request.contextPath}/LogoutServlet",
+                    data: "logout=true",
+                    success: function (risposta){
+                        window.location.href = "../Login.jsp";
+                    },
+                    error: function () {
+                        alert("Chiamata fallita!!!");
+                    }
+                });
             }
             
             function getGTerreno(){
@@ -141,52 +156,6 @@
                             alert("Chiamata fallita!!!");
                         }
                     });
-                }
-            }
-        </script>
-        <script type="text/javascript">
-            function indietro(){
-                window.location.href = "../Aggiungi.html";
-            }
-            
-            function aggiungi(){
-                
-                RSociale = document.getElementById('RSociale').value;
-                CTerra = document.getElementById('CTerra').value;
-                anno = document.getElementById('anno').value;
-                quota = document.getElementById('quota').value;
-                mappale = document.getElementById('mappale').value;
-                
-                if(RSociale === ""){
-                    alert("Inserire tutti i campi");
-                }else{
-                    if(CTerra === ""){
-                        alert("Inserire tutti i campi");
-                    }else{
-                        if(anno === ""){
-                            alert("Inserire tutti i campi");
-                        }else{
-                            if(quota === ""){
-                                alert("Inserire tutti i campi");
-                            }else{
-                                if(mappale === ""){
-                                    alert("Inserire tutti i campi");
-                                }else{
-                                    $.ajax({
-                                        type: 'POST',
-                                        url: "${pageContext.request.contextPath}/AddAzAgricolaServlet",
-                                        data: "RSociale="+RSociale+"&CTerra="+CTerra+"&anno="+anno+"&quota="+quota+"&ID="+mappale,
-                                        success: function (risposta){
-                                            window.location.href = "../Aggiungi.html";
-                                        },
-                                        error: function () {
-                                            alert("Chiamata fallita!!!");
-                                        }
-                                    });
-                                }
-                            }
-                        }
-                    }
                 }
             }
         </script>

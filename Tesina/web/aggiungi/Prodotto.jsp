@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=US-ASCII" pageEncoding="US-ASCII"%>
 <html>
     <head>
         <title>Aggiungi</title>
@@ -8,16 +9,15 @@
         <meta name="keywords" content="" />
         <link rel="stylesheet" href="../assets/css/main.css" />
     </head>
-
-
-
-
-
     <body class="is-preload">
-
+        <%
+            if (session.getAttribute("online") == null) {
+                response.sendRedirect("../Login.jsp");
+            }
+        %> 
         <!-- Header -->
         <header id="header">
-            <a class="logo" href="../Homepage.html">Homepage</a>
+            <a class="logo" href="../Homepage.jsp">Homepage</a>
             <nav>
                 <a href="#menu">Menu</a>
             </nav>
@@ -26,10 +26,11 @@
         <!-- Nav -->
         <nav id="menu">
             <ul class="links">
-                <li><a href="../Aggiungi.html">Aggiungi</a></li>
-                <li><a href="../Elimina.html">Elimina</a></li>
-                <li><a href="../Modifica.html">Modifica</a></li>
-                <li><a href="../Visualizza.html">Visualizza</a></li>
+                <li><a href="../Aggiungi.jsp">Aggiungi</a></li>
+                <li><a href="../Elimina.jsp">Elimina</a></li>
+                <li><a href="../Modifica.jsp">Modifica</a></li>
+                <li><a href="../Visualizza.jsp">Visualizza</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
             </ul>
         </nav>
 
@@ -45,7 +46,7 @@
                     <select id="prodotto" onchange="addProdotto()">
                         <option value="0">--- Decidere cosa fare ---</option>
                         <option value="1">Nuovo prodotto</option>
-                        <option value="2">Nuova quantità di un prodotto</option>
+                        <option value="2">Nuova quantit? di un prodotto</option>
                     </select>
                 </form>
                 <div class="col-md-12" id="table">
@@ -164,7 +165,21 @@
             }
     
             function indietro(){
-                window.location.href = "../Aggiungi.html";
+                window.location.href = "../Aggiungi.jsp";
+            }
+            
+            function logout(){
+                $.ajax({
+                    type: 'POST',
+                    url: "${pageContext.request.contextPath}/LogoutServlet",
+                    data: "logout=true",
+                    success: function (risposta){
+                        window.location.href = "../Login.jsp";
+                    },
+                    error: function () {
+                        alert("Chiamata fallita!!!");
+                    }
+                });
             }
             
             function aggiungiProdotto(){
@@ -219,7 +234,7 @@
                                                                 url: "${pageContext.request.contextPath}/AddProdottoServlet",
                                                                 data: "nome="+nome+"&tipo="+tipo+"&titoloN="+titoloN+"&titoloP="+titoloP+"&titoloK="+titoloK+"&note="+note+"&ndes="+ndes+"&ragione="+ragione+"&ddt="+ddt+"&data="+data+"&lkg="+lkg,
                                                                 success: function (risposta){
-                                                                    window.location.href = "../Aggiungi.html";
+                                                                    window.location.href = "../Aggiungi.jsp";
                                                                 },
                                                                 error: function () {
                                                                     alert("Chiamata fallita!!!");
@@ -266,7 +281,7 @@
                                         url: "${pageContext.request.contextPath}/AddOrdineServlet",
                                         data: "ragione="+ragione+"&nome="+nome+"&ddt="+ddt+"&data="+data+"&lkg="+lkg,
                                         success: function (risposta){
-                                            window.location.href = "../Aggiungi.html";
+                                            window.location.href = "../Aggiungi.jsp";
                                         },
                                         error: function () {
                                             alert("Chiamata fallita!!!");

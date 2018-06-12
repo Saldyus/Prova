@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=US-ASCII" pageEncoding="US-ASCII"%>
 <html>
     <head>
         <title>Aggiungi</title>
@@ -8,16 +9,15 @@
         <meta name="keywords" content="" />
         <link rel="stylesheet" href="../assets/css/main.css" />
     </head>
-
-
-
-
-
     <body class="is-preload">
-
+        <%
+            if (session.getAttribute("online") == null) {
+                response.sendRedirect("../Login.jsp");
+            }
+        %> 
         <!-- Header -->
         <header id="header">
-            <a class="logo" href="../Homepage.html">Homepage</a>
+            <a class="logo" href="../Homepage.jsp">Homepage</a>
             <nav>
                 <a href="#menu">Menu</a>
             </nav>
@@ -26,10 +26,11 @@
         <!-- Nav -->
         <nav id="menu">
             <ul class="links">
-                <li><a href="../Aggiungi.html">Aggiungi</a></li>
-                <li><a href="../Elimina.html">Elimina</a></li>
-                <li><a href="../Modifica.html">Modifica</a></li>
-                <li><a href="../Visualizza.html">Visualizza</a></li>
+                <li><a href="../Aggiungi.jsp">Aggiungi</a></li>
+                <li><a href="../Elimina.jsp">Elimina</a></li>
+                <li><a href="../Modifica.jsp">Modifica</a></li>
+                <li><a href="../Visualizza.jsp">Visualizza</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
             </ul>
         </nav>
 
@@ -46,7 +47,7 @@
                         <thead>
                             <tr>
                                 <th>Tipo Concimazione</th>
-                                <th>Quantità usata ton</th>
+                                <th>Quantit? usata ton</th>
                                 <th>Supericie ha</th>
                                 <th>Concime</th>
                                 <th>Data</th>
@@ -98,9 +99,36 @@
         <script src="../assets/js/grid.js"></script>
         <script type="text/javascript">
             function indietro(){
-                window.location.href = "../Aggiungi.html";
+                window.location.href = "../Aggiungi.jsp";
             }
             
+            function logout(){
+                $.ajax({
+                    type: 'POST',
+                    url: "${pageContext.request.contextPath}/LogoutServlet",
+                    data: "logout=true",
+                    success: function (risposta){
+                        window.location.href = "../Login.jsp";
+                    },
+                    error: function () {
+                        alert("Chiamata fallita!!!");
+                    }
+                });
+            }
+            
+            function logout(){
+                $.ajax({
+                    type: 'POST',
+                    url: "${pageContext.request.contextPath}/LogoutServlet",
+                    data: "logout=true",
+                    success: function (risposta){
+                        window.location.href = "Login.jsp";
+                    },
+                    error: function () {
+                        alert("Chiamata fallita!!!");
+                    }
+                });
+            }
             function aggiungi(){
                 
                 tipo = document.getElementById('tipo').value;
@@ -137,7 +165,7 @@
                                                 url: "${pageContext.request.contextPath}/AddConcimazioneServlet",
                                                 data: "tipo="+tipo+"&qta="+qta+"&superficie="+superficie+"&concime="+concime+"&data="+data+"&note="+note+"&campo="+campo,
                                                 success: function (risposta){
-                                                    window.location.href = "../Aggiungi.html";
+                                                    window.location.href = "../Aggiungi.jsp";
                                                 },
                                                 error: function () {
                                                     alert("Chiamata fallita!!!");

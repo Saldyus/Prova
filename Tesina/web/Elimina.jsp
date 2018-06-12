@@ -1,7 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=US-ASCII" pageEncoding="US-ASCII"%>
 <html>
     <head>
-        <title>Visualizza</title>
-        <link rel="icon" href="images/Visualizza.png" type="image/jpg" />
+        <title>Elimina</title>
+        <link rel="icon" href="images/Elimina.png" type="image/jpg" />
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <meta name="description" content="" />
@@ -10,10 +11,14 @@
         <link rel="stylesheet" href="assets/css/button.css" />
     </head>
     <body class="is-preload">
-
+        <%
+            if (session.getAttribute("online") == null) {
+                response.sendRedirect("Login.jsp");
+            }
+        %> 
         <!-- Header -->
         <header id="header">
-            <a class="logo" href="Homepage.html">Homepage</a>
+            <a class="logo" href="Homepage.jsp">Homepage</a>
             <nav>
                 <a href="#menu">Menu</a>
             </nav>
@@ -22,75 +27,77 @@
         <!-- Nav -->
         <nav id="menu">
             <ul class="links">
-                <li><a href="Aggiungi.html">Aggiungi</a></li>
-                <li><a href="Elimina.html">Elimina</a></li>
-                <li><a href="Modifica.html">Modifica</a></li>
-                <li><a href="Visualizza.html">Visualizza</a></li>
+                <li><a href="Aggiungi.jsp">Aggiungi</a></li>
+                <li><a href="Elimina.jsp">Elimina</a></li>
+                <li><a href="Modifica.jsp">Modifica</a></li>
+                <li><a href="Visualizza.jsp">Visualizza</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
             </ul>
         </nav>
 
-        <!-- button -->
-        <a href="" class="boton">
+        <!-- Buttons -->
+
+        <a href="elimina/Mappale.jsp" class="boton">
             <div class="botontext">Mappale</div>
             <div class="botontext">Mappale</div>
         </a>
-        <a href="" class="boton" style="left: 425px;">
+        <a href="elimina/AzAgricolaLiquami.jsp" class="boton" style="left: 425px;">
             <div class="botontext">Azienda agricola liquami</div>
             <div class="botontext">Azienda agricola liquami</div>
         </a>
-        <a href="" class="boton" style="left: 725px;">
+        <a href="elimina/AzAgricola.jsp" class="boton" style="left: 725px;">
             <div class="botontext">Azienda agricola</div>
             <div class="botontext">Azienda agricola</div>
         </a>
-        <a href="" class="boton" style="left: 1025px;">
+        <a href="elimina/Pianificazione.jsp" class="boton" style="left: 1025px;">
             <div class="botontext">Pianificazione</div>
             <div class="botontext">Pianificazione</div>
         </a>
-        <a href="" class="boton" style="top: 175px;">
+        <a href="elimina/Campo.jsp" class="boton" style="top: 175px;">
             <div class="botontext">campo</div>
             <div class="botontext">campo</div>
         </a>
-        <a href="" class="boton" style="left:425px; top: 175px;">
+        <a href="elimina/Analisi.jsp" class="boton" style="left:425px; top: 175px;">
             <div class="botontext">analisi</div>
             <div class="botontext">analisi</div>
         </a>
-        <a href="" class="boton" style="left:725px; top: 175px;">
+        <a href="elimina/Raccolto.jsp" class="boton" style="left:725px; top: 175px;">
             <div class="botontext">raccolti</div>
             <div class="botontext">raccolti</div>
         </a>
-        <a href="" class="boton" style="left:1025px; top: 175px;">
+        <a href="elimina/Semina.jsp" class="boton" style="left:1025px; top: 175px;">
             <div class="botontext">semina</div>
             <div class="botontext">semina</div>
         </a>
-        <a href="" class="boton" style="top: 300px;">
+        <a href="elimina/Lavorazione.jsp" class="boton" style="top: 300px;">
             <div class="botontext">lavorazioni</div>
             <div class="botontext">lavorazioni</div>
         </a>
-        <a href="" class="boton" style="left:425px; top: 300px;">
+        <a href="elimina/TrattamentoFitofarmaco.jsp" class="boton" style="left:425px; top: 300px;">
             <div class="botontext">trattamento fitofarmaci</div>
             <div class="botontext">trattamento fitofarmaci</div>
         </a>
-        <a href="" class="boton" style="left:725px; top: 300px;">
+        <a href="elimina/Concimazione.jsp" class="boton" style="left:725px; top: 300px;">
             <div class="botontext">concimazioni</div>
             <div class="botontext">concimazioni</div>
         </a>
-        <a href="" class="boton" style="left:1025px; top: 300px;">
+        <a href="elimina/TitConcimazioneOrganica.jsp" class="boton" style="left:1025px; top: 300px;">
             <div class="botontext">tit. concimazioni organica</div>
             <div class="botontext">tit. concimazioni organica</div>
         </a>
-        <a href="" class="boton" style="top: 425px;">
+        <a href="elimina/Proprietario.jsp" class="boton" style="top: 425px;">
             <div class="botontext">Proprietario mappale</div>
             <div class="botontext">Proprietario mappale</div>
         </a>
-        <a href="" class="boton" style="left:425px; top: 425px;">
+        <a href="elimina/Prodotto.jsp" class="boton" style="left:425px; top: 425px;">
             <div class="botontext">prodotti</div>
             <div class="botontext">prodotti</div>
         </a>
-        <a href="" class="boton" style="left:725px; top: 425px;">
+        <a href="elimina/Dosaggio.jsp" class="boton" style="left:725px; top: 425px;">
             <div class="botontext">dosaggi</div>
             <div class="botontext">dosaggi</div>
         </a>
-        <a href="" class="boton" style="left:1025px; top: 425px;">
+        <a href="elimina/DescrizioneProdotto.jsp" class="boton" style="left:1025px; top: 425px;">
             <div class="botontext">descrizione prodotti</div>
             <div class="botontext">descrizione prodotti</div>
         </a>
@@ -102,6 +109,20 @@
         <script src="assets/js/util.js"></script>
         <script src="assets/js/main.js"></script>
         <script src="assets/js/button.js"></script>
-
+        <script>
+            function logout(){
+            $.ajax({
+                type: 'POST',
+                url: "${pageContext.request.contextPath}/LogoutServlet",
+                data: "logout=true",
+                success: function (risposta){
+                    window.location.href = "Login.jsp";
+                },
+                error: function () {
+                    alert("Chiamata fallita!!!");
+                }
+            });
+            }
+        </script>
     </body>
 </html>

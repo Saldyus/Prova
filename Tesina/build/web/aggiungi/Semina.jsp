@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=US-ASCII" pageEncoding="US-ASCII"%>
 <html>
     <head>
         <title>Aggiungi</title>
@@ -8,16 +9,15 @@
         <meta name="keywords" content="" />
         <link rel="stylesheet" href="../assets/css/main.css" />
     </head>
-
-
-
-
-
     <body class="is-preload">
-
+        <%
+            if (session.getAttribute("online") == null) {
+                response.sendRedirect("../Login.jsp");
+            }
+        %> 
         <!-- Header -->
         <header id="header">
-            <a class="logo" href="../Homepage.html">Homepage</a>
+            <a class="logo" href="../Homepage.jsp">Homepage</a>
             <nav>
                 <a href="#menu">Menu</a>
             </nav>
@@ -26,10 +26,11 @@
         <!-- Nav -->
         <nav id="menu">
             <ul class="links">
-                <li><a href="../Aggiungi.html">Aggiungi</a></li>
-                <li><a href="../Elimina.html">Elimina</a></li>
-                <li><a href="../Modifica.html">Modifica</a></li>
-                <li><a href="../Visualizza.html">Visualizza</a></li>
+                <li><a href="../Aggiungi.jsp">Aggiungi</a></li>
+                <li><a href="../Elimina.jsp">Elimina</a></li>
+                <li><a href="../Modifica.jsp">Modifica</a></li>
+                <li><a href="../Visualizza.jsp">Visualizza</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
             </ul>
         </nav>
 
@@ -107,7 +108,21 @@
         <script src="../assets/js/grid.js"></script>
         <script type="text/javascript">
             function indietro(){
-                window.location.href = "../Aggiungi.html";
+                window.location.href = "../Aggiungi.jsp";
+            }
+            
+            function logout(){
+                $.ajax({
+                    type: 'POST',
+                    url: "${pageContext.request.contextPath}/LogoutServlet",
+                    data: "logout=true",
+                    success: function (risposta){
+                        window.location.href = "../Login.jsp";
+                    },
+                    error: function () {
+                        alert("Chiamata fallita!!!");
+                    }
+                });
             }
             
             function aggiungi(){
@@ -158,7 +173,7 @@
                                                             url: "${pageContext.request.contextPath}/AddSemicaServlet",
                                                             data: "varieta="+varieta+"&coltura="+coltura+"&m1_3="+m1_3+"&m1_2="+m1_2+"&m2_3="+m2_3+"&pm2="+pm2+"&nmat="+nmat+"&nsem="+nsem+"&data="+data+"&campo="+campo,
                                                             success: function (risposta){
-                                                                window.location.href = "../Aggiungi.html";
+                                                                window.location.href = "../Aggiungi.jsp";
                                                             },
                                                             error: function () {
                                                                 alert("Chiamata fallita!!!");

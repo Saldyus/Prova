@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=US-ASCII" pageEncoding="US-ASCII"%>
 <html>
     <head>
         <title>Aggiungi</title>
@@ -8,16 +9,15 @@
         <meta name="keywords" content="" />
         <link rel="stylesheet" href="../assets/css/main.css" />
     </head>
-
-
-
-
-
     <body class="is-preload">
-
+        <%
+            if (session.getAttribute("online") == null) {
+                response.sendRedirect("../Login.jsp");
+            }
+        %> 
         <!-- Header -->
         <header id="header">
-            <a class="logo" href="../Homepage.html">Homepage</a>
+            <a class="logo" href="../Homepage.jsp">Homepage</a>
             <nav>
                 <a href="#menu">Menu</a>
             </nav>
@@ -26,10 +26,11 @@
         <!-- Nav -->
         <nav id="menu">
             <ul class="links">
-                <li><a href="../Aggiungi.html">Aggiungi</a></li>
-                <li><a href="../Elimina.html">Elimina</a></li>
-                <li><a href="../Modifica.html">Modifica</a></li>
-                <li><a href="../Visualizza.html">Visualizza</a></li>
+                <li><a href="../Aggiungi.jsp">Aggiungi</a></li>
+                <li><a href="../Elimina.jsp">Elimina</a></li>
+                <li><a href="../Modifica.jsp">Modifica</a></li>
+                <li><a href="../Visualizza.jsp">Visualizza</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
             </ul>
         </nav>
 
@@ -101,63 +102,25 @@
         <script src="../assets/js/grid.js"></script>
         <script type="text/javascript">
             function indietro(){
-                window.location.href = "../Aggiungi.html";
+                window.location.href = "../Elimina.jsp";
             }
             
-            function aggiungi(){
-                
-                campo = document.getElementById('campo').value;
-                data = document.getElementById('data').value;
-                ordine = document.getElementById('ordine').value;
-                coltura = document.getElementById('coltura').value;
-                superficie = document.getElementById('superficie').value;
-                gli = document.getElementById('gli').value;
-                umi = document.getElementById('umi').value;
-                stoccaggio = document.getElementById('stoccaggio').value;
-                
-                if(campo === ""){
-                    alert("Inserire tutti i campi");
-                }else{
-                    if(data === ""){
-                        alert("Inserire tutti i campi");
-                    }else{
-                        if(ordine === ""){
-                            alert("Inserire tutti i campi");
-                        }else{
-                            if(coltura === ""){
-                                alert("Inserire tutti i campi");
-                            }else{
-                                if(superficie === ""){
-                                    alert("Inserire tutti i campi");
-                                }else{
-                                    if(gli === ""){
-                                        alert("Inserire tutti i campi");
-                                    }else{
-                                        if(umi === ""){
-                                            alert("Inserire tutti i campi");
-                                        }else{
-                                            if(stoccaggio === ""){
-                                                alert("Inserire tutti i campi");
-                                            }else{
-                                                $.ajax({
-                                                    type: 'POST',
-                                                    url: "${pageContext.request.contextPath}/AddRaccoltoServlet",
-                                                    data: "campo="+campo+"&data="+data+"&ordine="+ordine+"&superficie="+superficie+"&coltura="+coltura+"&gli="+gli+"&umidita="+umi+"&stocaggio="+stocaggio,
-                                                    success: function (risposta){
-                                                        window.location.href = "../Aggiungi.html";
-                                                    },
-                                                    error: function () {
-                                                        alert("Chiamata fallita!!!");
-                                                    }
-                                                });
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-                        }
+            function logout(){
+                $.ajax({
+                    type: 'POST',
+                    url: "${pageContext.request.contextPath}/LogoutServlet",
+                    data: "logout=true",
+                    success: function (risposta){
+                        window.location.href = "../Login.jsp";
+                    },
+                    error: function () {
+                        alert("Chiamata fallita!!!");
                     }
-                }
+                });
+            }
+            
+            function elimina(){
+                
             }
         </script>
     </body>

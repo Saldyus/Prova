@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=US-ASCII" pageEncoding="US-ASCII"%>
 <html>
     <head>
         <title>Aggiungi</title>
@@ -8,16 +9,15 @@
         <meta name="keywords" content="" />
         <link rel="stylesheet" href="../assets/css/main.css" />
     </head>
-
-
-
-
-
     <body class="is-preload">
-
+        <%
+            if (session.getAttribute("online") == null) {
+                response.sendRedirect("../Login.jsp");
+            }
+        %> 
         <!-- Header -->
         <header id="header">
-            <a class="logo" href="../Homepage.html">Homepage</a>
+            <a class="logo" href="../Homepage.jsp">Homepage</a>
             <nav>
                 <a href="#menu">Menu</a>
             </nav>
@@ -26,10 +26,11 @@
         <!-- Nav -->
         <nav id="menu">
             <ul class="links">
-                <li><a href="../Aggiungi.html">Aggiungi</a></li>
-                <li><a href="../Elimina.html">Elimina</a></li>
-                <li><a href="../Modifica.html">Modifica</a></li>
-                <li><a href="../Visualizza.html">Visualizza</a></li>
+                <li><a href="../Aggiungi.jsp">Aggiungi</a></li>
+                <li><a href="../Elimina.jsp">Elimina</a></li>
+                <li><a href="../Modifica.jsp">Modifica</a></li>
+                <li><a href="../Visualizza.jsp">Visualizza</a></li>
+                <li><a href="#" onclick="logout()">Logout</a></li>
             </ul>
         </nav>
 
@@ -98,58 +99,25 @@
         <script src="../assets/js/grid.js"></script>
         <script type="text/javascript">
             function indietro(){
-                window.location.href = "../Aggiungi.html";
+                window.location.href = "../Elimina.jsp";
             }
             
-            function aggiungi(){
-                
-                nome = document.getElementById('nome').value;
-                pdf_et = document.getElementById('pdf_et').value;
-                pdf_ss = document.getElementById('pdf_ss').value;
-                pa1 = document.getElementById('pa1').value;
-                pa1_p = document.getElementById('pa1_p').value;
-                pa2 = document.getElementById('pa2').value;
-                pa2_p = document.getElementById('pa2_p').value;
-                
-                if(nome === ""){
-                    alert("Inserire tutti i campi");
-                }else{
-                    if(pdf_et === ""){
-                        alert("Inserire tutti i campi");
-                    }else{
-                        if(pdf_ss === ""){
-                            alert("Inserire tutti i campi");
-                        }else{
-                            if(pa1 === ""){
-                                alert("Inserire tutti i campi");
-                            }else{
-                                if(pa1_p === ""){
-                                    alert("Inserire tutti i campi");
-                                }else{
-                                    if(pa2 === ""){
-                                        alert("Inserire tutti i campi");
-                                    }else{
-                                        if(pa2_p === ""){
-                                            alert("Inserire tutti i campi");s
-                                        }else{
-                                            $.ajax({
-                                                type: 'POST',
-                                                url: "${pageContext.request.contextPath}/AddLavorazioneServlet",
-                                                data: "campo="+campo+"&lavorazione="+lavorazione+"&attrezzatura="+attrezzatura+"&data="+data+"&note="+note,
-                                                success: function (risposta){
-                                                    window.location.href = "../Aggiungi.html";
-                                                },
-                                                error: function () {
-                                                    alert("Chiamata fallita!!!");
-                                                }
-                                            });
-                                        }
-                                    }
-                                }
-                            }
-                        }
+            function logout(){
+                $.ajax({
+                    type: 'POST',
+                    url: "${pageContext.request.contextPath}/LogoutServlet",
+                    data: "logout=true",
+                    success: function (risposta){
+                        window.location.href = "../Login.jsp";
+                    },
+                    error: function () {
+                        alert("Chiamata fallita!!!");
                     }
-                }
+                });
+            }
+            
+            function elimina(){
+                
             }
         </script>
     </body>

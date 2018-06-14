@@ -64,7 +64,7 @@ public class LoginServlet extends HttpServlet {
         String name = request.getParameter("nome");
         String password_r = request.getParameter("password");
         int index = 0;
-
+        
         try {
             String password_c = hashCode(password_r);
             Connection c = dataSource.getConnection();
@@ -74,7 +74,7 @@ public class LoginServlet extends HttpServlet {
                 String username = rs.getString("username");
                 String password = rs.getString("password");
                 
-                if (username.equals(name) && password.equals(hashCode(password_c))) {
+                if (username.equals(name) && password.equals(password_c)) {
                     index = 1;
                     HttpSession session = request.getSession();
                     session.setAttribute("online", true);

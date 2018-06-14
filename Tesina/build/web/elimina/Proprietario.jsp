@@ -1,7 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=US-ASCII" pageEncoding="US-ASCII"%>
+<%@ page language="java"%>
+<!DOCTYPE html>
 <html>
     <head>
-        <title>Aggiungi</title>
+        <title>Elimina</title>
         <link rel="icon" href="../images/Aggiungi.png" type="image/jpg" />
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -139,7 +140,7 @@
             
             function eliminaProprietario(){
                 
-                if(confirm("Confermi di voler eliminare il prorietario?\n Potrai eliminarlo solo se non compare nella tabella qui presente")){
+                if(confirm("Confermi di voler eliminare il prorietario?\nSe lo elimini eliminerai tutto ciò che è associato ad esso in questa tabella")){
                     
                     nome = document.getElementById("nome_c").value;
 

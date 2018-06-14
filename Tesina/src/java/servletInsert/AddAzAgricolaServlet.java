@@ -24,7 +24,7 @@ import javax.sql.DataSource;
  *
  * @author Salvatore Dinaro
  */
-@WebServlet(name = "AddAzAgricola", urlPatterns = {"/AddAzAgricola"})
+@WebServlet(name = "AddAzAgricola", urlPatterns = {"/AddAzAgricolaServlet"})
 public class AddAzAgricolaServlet extends HttpServlet {
 
     @Resource(name = "java:app/jdbc/TesinaR")

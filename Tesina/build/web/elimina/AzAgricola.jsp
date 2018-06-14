@@ -105,9 +105,9 @@
                     data: "",
                     success: function (risposta){
                         var html = "";
-                        for(i in risposta.gTerreno){
-                            html += "<td id=\"RSociale\">"+risposta.gTerreno[i].RagioneSociale+"</td>"
-                                    + "<td>"+risposta.gTerreno[i].conduzioneterra+"</td>"
+                        for(i in risposta.azienda){
+                            html += "<td id=\"RSociale\">"+risposta.azienda[i].RagioneSociale+"</td>"
+                                    + "<td>"+risposta.azienda[i].conduzioneterra+"</td>"
                                     + "<td>"+risposta.gestisce[i].anno+"</td>"
                                     + "<td>"+risposta.gestisce[i].quota+"</td>"
                                     + "<td id=\"ID\">"+risposta.gestisce[i].ID_Mappale+"</td>"

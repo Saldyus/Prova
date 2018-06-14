@@ -111,7 +111,7 @@ public class AddConcimazioneServlet extends HttpServlet {
             ResultSet rs = st.executeQuery("SELECT * from tesina.titorganica ORDER BY data desc");
             while(rs.next()){
                 Date data = rs.getDate("data");
-                if(data_c.getTime() >= data.getTime()){
+                if(data_c.getTime() >= data.getTime() && ID == 0){
                     ID = rs.getInt("ID_Titolazione");
                     break;
                 }

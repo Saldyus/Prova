@@ -7,6 +7,7 @@ package servletDelete;
 
 import com.google.gson.Gson;
 import database.gTerreno;
+import database.gestisce;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -35,6 +36,8 @@ public class DeleteAzAgricolaServlet extends HttpServlet {
     @Resource(name = "java:app/jdbc/TesinaR")
     private DataSource dataSource;
     Gson g;
+    List<gTerreno> azienda;
+    List<gestisce> Gestisce;
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -49,8 +52,16 @@ public class DeleteAzAgricolaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        List<gTerreno> azienda = getGTerreno();
+        System.out.println("Servlet");
         
+        getGTerreno();
+        g = new Gson();
+        
+        String json = "{\"azienda\":" + g.toJson(azienda) +", \"gestisce\":"+ g.toJson(Gestisce) +"}";
+        System.out.println(json);
+        response.setContentType("application/json");
+        response.setCharacterEncoding("UTF-8");
+        response.getWriter().write(json);
     }
 
     /**
@@ -79,20 +90,29 @@ public class DeleteAzAgricolaServlet extends HttpServlet {
         return "Short description";
     }// </editor-fold>
 
-    private List<gTerreno> getGTerreno() {
-        List<gTerreno> azienda = new ArrayList<>();
+    private void getGTerreno() {
+        azienda = new ArrayList<>();
+        Gestisce = new ArrayList<>();
         
         try {
             Connection c = dataSource.getConnection();
             Statement st = c.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM gTerreno ORDER BY RagioneSociale");
-            
+            ResultSet rs = st.executeQuery("select gTerreno.*, gestisce.ID_Mappale, gestisce.anno, gestisce.quota from gTerreno, gestisce WHERE gTerreno.RagioneSociale = gestisce.RagioneSociale");
+            while(rs.next()){
+                String RSociale = rs.getString("RagioneSociale");
+                String CTerra = rs.getString("conduzioneterra");
+                int ID = rs.getInt("ID_Mappale");
+                int anno = rs.getInt("anno");
+                int quota = rs.getInt("quota");
+                gTerreno GT = new gTerreno(RSociale, CTerra);
+                gestisce ge = new gestisce(RSociale, ID, anno, quota);
+                azienda.add(GT);
+                Gestisce.add(ge);
+            }
             c.close();
         } catch (SQLException ex) {
             Logger.getLogger(DeleteAzAgricolaServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-        return azienda;
     }
 
 }

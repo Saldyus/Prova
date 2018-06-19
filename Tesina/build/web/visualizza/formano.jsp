@@ -3,22 +3,22 @@
 <html>
     <head>
         <title>Visualizza</title>
-        <link rel="icon" href="../image/Visualizza.png" type="image/jpg" />
+        <link rel="icon" href="image/Visualizza.png" type="image/jpg" />
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <meta name="description" content="" />
         <meta name="keywords" content="" />
-        <link rel="stylesheet" href="../assets/css/main.css" />
+        <link rel="stylesheet" href="assets/css/main.css" />
     </head>
     <body class="is-preload" onload="prova()">
         <%
             if (session.getAttribute("online") == null) {
-                response.sendRedirect("../Login.jsp");
+                response.sendRedirect("Login.jsp");
             }
         %> 
         <!-- Header -->
         <header id="header">
-            <a class="logo" href="../Homepage.jsp">Homepage</a>
+            <a class="logo" href="Homepage.jsp">Homepage</a>
             <nav>
                 <a href="#menu">Menu</a>
             </nav>
@@ -27,10 +27,10 @@
         <!-- Nav -->
         <nav id="menu">
             <ul class="links">
-                <li><a href="../Aggiungi.jsp">Aggiungi</a></li>
-                <li><a href="../Elimina.jsp">Elimina</a></li>
-                <li><a href="../Modifica.jsp">Modifica</a></li>
-                <li><a href="campo.jsp">Visualizza</a></li>
+                <li><a href="Aggiungi.jsp">Aggiungi</a></li>
+                <li><a href="Elimina.jsp">Elimina</a></li>
+                <li><a href="Modifica.jsp">Modifica</a></li>
+                <li><a href="visualizza/campo.jsp">Visualizza</a></li>
                 <li><a href="#" onclick="logout()">Logout</a></li>
             </ul>
         </nav>
@@ -73,15 +73,15 @@
         <link href='https://fonts.googleapis.com/css?family=Montserrat:700' rel='stylesheet' type='text/css'>
 
         <!-- Scripts -->
-        <script src="../assets/js/jquery.min.js"></script>
-        <script src="../assets/js/browser.min.js"></script>
-        <script src="../assets/js/breakpoints.min.js"></script>
-        <script src="../assets/js/util.js"></script>
-        <script src="../assets/js/main.js"></script>
-        <script src="../assets/js/grid.js"></script>?
+        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/browser.min.js"></script>
+        <script src="assets/js/breakpoints.min.js"></script>
+        <script src="assets/js/util.js"></script>
+        <script src="assets/js/main.js"></script>
+        <script src="assets/js/grid.js"></script>
         <script type="text/javascript">
             function indietro(){
-                window.location.href = "../Elimina.jsp";
+                window.location.href = "Elimina.jsp";
             }
             
             function logout(){
@@ -90,7 +90,7 @@
                     url: "${pageContext.request.contextPath}/LogoutServlet",
                     data: "logout=true",
                     success: function (risposta){
-                        window.location.href = "../Login.jsp";
+                        window.location.href = "Login.jsp";
                     },
                     error: function () {
                         alert("Chiamata fallita!!!");

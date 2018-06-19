@@ -43,21 +43,19 @@
             <div class="row">
                 <h3 class="text-center text-primary"></h3>
                 <div class="col-md-12">
-                    <form action="${pageContext.request.contextPath}/SeeFormanoServlet" method="POST">
-                        <table class="table table-hover" id="worked">
-                            <thead>
-                                <tr>
-                                    <th>Nome del campo</th>
-                                    <th>Zona</th>
-                                    <th>UPA</th>
-                                    <th>Superficie</th>
-                                </tr>
-                            </thead>
-                            <tbody id="body">
+                    <table class="table table-hover" id="worked">
+                        <thead>
+                            <tr>
+                                <th>Nome del campo</th>
+                                <th>Zona</th>
+                                <th>UPA</th>
+                                <th>Superficie</th>
+                            </tr>
+                        </thead>
+                        <tbody id="body">
 
-                            </tbody>
-                        </table>
-                    </form>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -121,7 +119,7 @@
                                             + "<td>" + risposta.campi[i].zona + "</td>"
                                             + "<td>" + risposta.campi[i].UPA + "</td>"
                                             + "<td>" + risposta.campi[i].superficie + "</td>"
-                                            + "<td><button type=\"submit\" class=\"btn btn-blue\" name=\"" + risposta.campi[i].nome + "\">Mappali</button></td>"
+                                            + "<td><form action=\"${pageContext.request.contextPath}/SeeFormanoServlet\" method=\"POST\"><button type=\"submit\" class=\"btn btn-blue\" name=\"mappale\" value=\"" + risposta.campi[i].nome + "\">Mappali</button></form></td>"
                                             + "<td><button type=\"button\" class=\"btn btn-blue\" onclick=\"concimazioni('" + risposta.campi[i].nome + "')\">Concimazioni</button></td>"
                                             + "<td><button type=\"button\" class=\"btn btn-blue\" onclick=\"trfit('" + risposta.campi[i].nome + "')\">Trattamenti Fitofarmaci</button></td>"
                                             + "<td><button type=\"button\" class=\"btn btn-blue\" onclick=\"lavorazioni('" + risposta.campi[i].nome + "')\">Lavorazioni</button></td>"

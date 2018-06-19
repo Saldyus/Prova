@@ -50,8 +50,6 @@ public class SeeFormanoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        System.out.println("prova");
-        
     }
 
     /**
@@ -66,7 +64,7 @@ public class SeeFormanoServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        String nome = request.getParameter("nome");
+        String nome = request.getParameter("mappale");
         
         List<formano> forma = getFormano(nome);
         

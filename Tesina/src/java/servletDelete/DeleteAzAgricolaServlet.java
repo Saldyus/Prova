@@ -35,8 +35,11 @@ public class DeleteAzAgricolaServlet extends HttpServlet {
 
     @Resource(name = "java:app/jdbc/TesinaR")
     private DataSource dataSource;
+    
     Gson g;
+    
     List<gTerreno> azienda;
+    
     List<gestisce> Gestisce;
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -52,13 +55,10 @@ public class DeleteAzAgricolaServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        System.out.println("Servlet");
-        
         getGTerreno();
         g = new Gson();
         
         String json = "{\"azienda\":" + g.toJson(azienda) +", \"gestisce\":"+ g.toJson(Gestisce) +"}";
-        System.out.println(json);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         response.getWriter().write(json);

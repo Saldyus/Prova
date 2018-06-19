@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Aggiungi</title>
-        <link rel="icon" href="images/Aggiungi.png" type="image/jpg" />
+        <link rel="icon" href="image/Aggiungi.png" type="image/jpg" />
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <meta name="description" content="" />

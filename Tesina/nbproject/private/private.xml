@@ -4,11 +4,15 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/salva/OneDrive/Documenti/GitHub/Prova/Tesina/web/elimina/Proprietario.jsp</file>
-            <file>file:/C:/Users/salva/OneDrive/Documenti/GitHub/Prova/Tesina/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/salva/OneDrive/Documenti/GitHub/Prova/Tesina/src/java/servletInsert/AddAzAgricolaServlet.java</file>
+            <file>file:/C:/Users/salva/OneDrive/Documenti/GitHub/Prova/Tesina/web/visualizza/campo.jsp</file>
+            <file>file:/C:/Users/salva/OneDrive/Documenti/GitHub/Prova/Tesina/src/java/servletGet/SeeFormanoServlet.java</file>
+            <file>file:/C:/Users/salva/OneDrive/Documenti/GitHub/Prova/Tesina/web/visualizza/formano.jsp</file>
+            <file>file:/C:/Users/salva/OneDrive/Documenti/GitHub/Prova/Tesina/web/Homepage.jsp</file>
+            <file>file:/C:/Users/salva/OneDrive/Documenti/GitHub/Prova/Tesina/web/Login.jsp</file>
             <file>file:/C:/Users/salva/OneDrive/Documenti/GitHub/Prova/Tesina/src/java/servletDelete/DeleteAzAgricolaServlet.java</file>
-            <file>file:/C:/Users/salva/OneDrive/Documenti/GitHub/Prova/Tesina/src/java/servletDelete/DeleteAnalisiServlet.java</file>
             <file>file:/C:/Users/salva/OneDrive/Documenti/GitHub/Prova/Tesina/web/elimina/AzAgricola.jsp</file>
+            <file>file:/C:/Users/salva/OneDrive/Documenti/GitHub/Prova/Tesina/src/java/servletGet/SeeCampoServlet.java</file>
+            <file>file:/C:/Users/salva/OneDrive/Documenti/GitHub/Prova/Tesina/src/java/com/Servlet/LoginServlet.java</file>
         </group>
     </open-files>
 </project-private>

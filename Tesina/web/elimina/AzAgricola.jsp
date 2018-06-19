@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Elimina</title>
-        <link rel="icon" href="../images/Aggiungi.png" type="image/jpg" />
+        <link rel="icon" href="../image/Aggiungi.png" type="image/jpg" />
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <meta name="description" content="" />
@@ -38,10 +38,10 @@
         <!--Grid-->    
         <div class="container">
             <div class="row">
-                <h2>simple GRID</h2>
+                <h2>Eliminazione di un'azienda agricola</h2>
             </div>
             <div class="row">
-                <h3 class="text-center text-primary">Persons</h3>
+                <h3 class="text-center text-primary"></h3>
                 <div class="col-md-12">
                     <table class="table table-hover" id="worked">
                         <thead>

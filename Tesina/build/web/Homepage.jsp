@@ -2,7 +2,7 @@
 <html>
     <head>
         <title>Homepage</title>
-        <link rel="icon" href="images/Homepage.png" type="image/jpg" />
+        <link rel="icon" href="image/HOMEPAGE.png" type="image/jpg" />
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
         <meta name="description" content="" />
@@ -14,7 +14,7 @@
             if (session.getAttribute("online") == null) {
                 response.sendRedirect("Login.jsp");
             }
-        %>    
+        %>   
         <!-- Header -->
         <header id="header">
             <a class="logo" href="Homepage.jsp">Homepage</a>
@@ -29,7 +29,7 @@
                 <li><a href="Aggiungi.jsp">Aggiungi</a></li>
                 <li><a href="Elimina.jsp">Elimina</a></li>
                 <li><a href="Modifica.jsp">Modifica</a></li>
-                <li><a href="Visualizza.jsp">Visualizza</a></li>
+                <li><a href="visualizza/campo.jsp">Visualizza</a></li>
                 <li><a href="#" onclick="logout()">Logout</a></li>
             </ul>
         </nav>
@@ -38,97 +38,91 @@
         <section id="banner">
             <div class="inner">
                 <h1>GATTI BORTOLO E FIGLI S.S</h1>
-                <p>A responsive business oriented template with a video background
-                    <br />
-                    designed by <a href="https://templated.co/">TEMPLATED</a> and released under the Creative Commons License.</p>
+                <p>9, Via Coler - 25020 Flero (BS)
+   <br>030 2640173</p>
             </div>
-            <video autoplay loop muted playsinline src="images/banner.mp4"></video>
+            <video autoplay loop muted playsinline src="image/VIDEOO.MOV"></video>
         </section>
 
         <!-- Highlights -->
         <section class="wrapper">
             <div class="inner">
                 <header class="special">
-                    <h2>Sem turpis amet semper</h2>
-                    <p>In arcu accumsan arcu adipiscing accumsan orci ac. Felis id enim aliquet. Accumsan ac integer lobortis commodo ornare aliquet accumsan erat tempus amet porttitor.</p>
+                    <h2>SPECIALIZZAZIONI</h2>
+                    <p>Gatti Bortolo & Figli  S.S. e' un'azienda agricola che svolge diverse attivita' in settori differenti quali:</p>
                 </header>
                 <div class="highlights">
                     <section>
                         <div class="content">
                             <header>
-                                <a href="#" class="icon fa-vcard-o"><span class="label">Icon</span></a>
-                                <h3>Feugiat consequat</h3>
+                                <a><img src="image/BOVINI.jpg"></a>
+                                <h3>ALLEVAMENTO BOVINI</h3>
                             </header>
-                            <p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
+                            <p>Recentemente raggiunto il passaggio dall' allevamento di manzi a quelli di carne 
+			    piu' pregiata. Arrivano in allevamento all'eta' di 6 mesi per poi, dopo 6 mesi, essere portati al macello. </p>
                         </div>
                     </section>
                     <section>
                         <div class="content">
                             <header>
-                                <a href="#" class="icon fa-files-o"><span class="label">Icon</span></a>
-                                <h3>Ante sem integer</h3>
+                                <a><img src="image/SUINI.jpg"></a>
+                                <h3>ALLEVAMENTO SUINI</h3>
                             </header>
-                            <p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
+                            <p>Quasi 8000 suini sono i capi totali presenti nell'allevamento i quali, 9
+			    mesi dopo essere stati qui, vengono trasferiti nei macelli piu' rinomati del Nord Italia
+			    al fine di ottenere poi, a lavoro finito, prodotti come il prosciutto di Parma o il San Daniele..</p>
                         </div>
                     </section>
                     <section>
                         <div class="content">
                             <header>
-                                <a href="#" class="icon fa-floppy-o"><span class="label">Icon</span></a>
-                                <h3>Ipsum consequat</h3>
+                                <a><img src="image/SEMINA.jpg"></a>
+                                <h3>SEMINA</h3>
                             </header>
-                            <p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
+                            <p>Vengono utilizzate moltissime varianti di semente per coltivare i terreni e nutrire il 
+			    bestiame, in modo da avere una resa sempre maggiore grazie anche alla rotazione delle
+			    colture o a speciali colture che arricchiscono il terreno di sostanze nutrienti.</p>
                         </div>
                     </section>
                     <section>
                         <div class="content">
                             <header>
-                                <a href="#" class="icon fa-line-chart"><span class="label">Icon</span></a>
-                                <h3>Interdum gravida</h3>
+                                <a><img src="image/FOTOVOLTAICO.jpg"></a>
+                                <h3>FOTOVOLTAICO</h3>
                             </header>
-                            <p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
+                            <p>Quasi 8000 metri quadrati di pannelli fotovoltaici ricoprono i tetti di alcuni dei capannoni dell'azienda
+			    al fine di ottenere energia ellettrica rinnovabile sfruttando l'energia solare.</p>
+			    
                         </div>
                     </section>
                     <section>
                         <div class="content">
                             <header>
-                                <a href="#" class="icon fa-paper-plane-o"><span class="label">Icon</span></a>
-                                <h3>Faucibus consequat</h3>
+                                
+				<a><img src="image/BIOGAS.jpg"></a>
+                                <h3>BIOGAS</h3>
                             </header>
-                            <p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
+                            <p>Una delle prime aziende bresciane a dotarsi di un impianto biogas che utilizza le biomasse quali liquame e 
+			    scarti di produzione cerealicola al fine di produrre energia elettrica riutilizzabile.</p>
                         </div>
                     </section>
                     <section>
                         <div class="content">
                             <header>
-                                <a href="#" class="icon fa-qrcode"><span class="label">Icon</span></a>
-                                <h3>Accumsan viverra</h3>
+                                <a><img src="image/LAVORAZIONI.jpg"></a>
+                                <h3>LAVORAZIONI</h3>
                             </header>
-                            <p>Nunc lacinia ante nunc ac lobortis ipsum. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus.</p>
+                            <p>Lavorazioni sempre nuove e innovative effettuate anche grazie ad attrezzi di qualita' importati dall'estero
+			    che rendono il terreno sempre piu' friabile e coltivabile. </p>
                         </div>
                     </section>
                 </div>
             </div>
         </section>
 
-        <!-- CTA -->
-        <section id="cta" class="wrapper">
-            <div class="inner">
-                <h2>Curabitur ullamcorper ultricies</h2>
-                <p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing. Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing sed feugiat eu faucibus. Integer ac sed amet praesent. Nunc lacinia ante nunc ac gravida.</p>
-            </div>
-        </section>
+        
 
-        <!-- Testimonials -->
-        <section class="wrapper">
-            <div class="inner">
-                <header class="special">
-                    <h2>Faucibus consequat lorem</h2>
-                    <p>In arcu accumsan arcu adipiscing accumsan orci ac. Felis id enim aliquet. Accumsan ac integer lobortis commodo ornare aliquet accumsan erat tempus amet porttitor.</p>
-                </header>
-
-            </div>
-        </section>
+        
 
         <!-- Footer -->
         <footer id="footer">
@@ -136,7 +130,12 @@
                 <div class="content">
                     <section>
                         <h3>Informazioni Azienda</h3>
-                        <p>Nunc lacinia ante nunc ac lobortis. Interdum adipiscing gravida odio porttitor sem non mi integer non faucibus ornare mi ut ante amet placerat aliquet. Volutpat eu sed ante lacinia sapien lorem accumsan varius montes viverra nibh in adipiscing. Lorem ipsum dolor vestibulum ante ipsum primis in faucibus vestibulum. Blandit adipiscing eu felis iaculis volutpat ac adipiscing sed feugiat eu faucibus. Integer ac sed amet praesent. Nunc lacinia ante nunc ac gravida.</p>
+                        <p>Gatti Bortolo & Figli  S.S. e' un'azienda agricola nel settore ormai da quasi 100 anni. 
+Nel tempo si e' espansa notevolmente, e da un piccolo allevamento di suini e' diventata un allevamento di medie dimensioni che divide la sua produzione tra bovini e suini. 
+Questo ha comportato anche un notevole aumento dei terreni da coltivare, per nutrire il bestiame, 
+dei mezzi utilizzati per effettuare lavorazioni sempre diverse e piu dispendiose, e del personale necessario per
+mantenere un'impresa di questo genere.
+</p>
                     </section>
                     <section>
                         <h4>Azioni Database</h4>
@@ -144,16 +143,20 @@
                             <li><a href="Aggiungi.jsp">Aggiungi</a></li>
                             <li><a href="Elimina.jsp">Elimina</a></li>
                             <li><a href="Modifica.jsp">Modifica</a></li>
-                            <li><a href="Visualizza.jsp">Visualizza</a></li>
+                            <li><a href="visualizza/campo.jsp">Visualizza</a></li>
+                            <li><a href="#" onclick="logout()">Logout</a></li>
                         </ul>
                     </section>
                     <section>
-                        <h4>Social Network</h4>
-                        <ul class="plain">
-                            <li><a href="#"><i class="icon fa-twitter">&nbsp;</i>Twitter</a></li>
-                            <li><a href="#"><i class="icon fa-facebook">&nbsp;</i>Facebook</a></li>
-                            <li><a href="#"><i class="icon fa-instagram">&nbsp;</i>Instagram</a></li>
-                            <li><a href="#"><i class="icon fa-github">&nbsp;</i>Github</a></li>
+                        <h4>RECAPITI</h4>
+                        <ul class="alt">
+			<li>Indirizzo: &nbsp;<a href="https://www.google.it/maps/place/Via+Coler,+9,+25020+Flero+BS/@45.469051
+			8,10.1685303,1
+			7z/data=!3m1!4b1!4m5!3m4!1s0x478174de2c87b111:0x108a9dbf790055e7!8m2!3d45
+			.4690481!4d10.170719">Via Coler, 9</a></li>
+                            <li>Num. Telefonico:&nbsp;030 2640173</li>
+                            <li>Mail:&nbsp;<a href="#">gattibortolo@gmail.com</a></li>
+                            <li>Sito Web:&nbsp;<a href="#">www.gattibortolo.it</a></li>
                         </ul>
                     </section>
                 </div>

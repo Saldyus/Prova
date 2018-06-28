@@ -115,7 +115,7 @@
                                 var html = "";
                                 var i = 0;
                                 for (i in risposta.campi) {
-                                    html += "<td>" + risposta.campi[i].nome + "</td>"
+                                    html += "<tr><td>" + risposta.campi[i].nome + "</td>"
                                             + "<td>" + risposta.campi[i].zona + "</td>"
                                             + "<td>" + risposta.campi[i].UPA + "</td>"
                                             + "<td>" + risposta.campi[i].superficie + "</td>"
@@ -125,7 +125,7 @@
                                             + "<td><button type=\"button\" class=\"btn btn-blue\" onclick=\"lavorazioni('" + risposta.campi[i].nome + "')\">Lavorazioni</button></td>"
                                             + "<td><button type=\"button\" class=\"btn btn-blue\" onclick=\"seminazioni('" + risposta.campi[i].nome + "')\">Seminazioni</button></td>"
                                             + "<td><button type=\"button\" class=\"btn btn-blue\" onclick=\"analisi('" + risposta.campi[i].nome + "')\">Analisi</button></td>"
-                                            + "<td><button type=\"button\" class=\"btn btn-blue\" onclick=\"raccolti('" + risposta.campi[i].nome + "')\">Raccolti</button></td>";
+                                            + "<td><button type=\"button\" class=\"btn btn-blue\" onclick=\"raccolti('" + risposta.campi[i].nome + "')\">Raccolti</button></td></tr>";
                                 }
                                 document.getElementById("body").innerHTML = html;
                             },

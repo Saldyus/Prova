@@ -30,7 +30,7 @@
                 <li><a href="Aggiungi.jsp">Aggiungi</a></li>
                 <li><a href="Elimina.jsp">Elimina</a></li>
                 <li><a href="Modifica.jsp">Modifica</a></li>
-                <li><a href="Visualizza.jsp">Visualizza</a></li>
+                <li><a href="visualizza/campo.jsp">Visualizza</a></li>
                 <li><a href="#" onclick="logout()">Logout</a></li>
             </ul>
         </nav>

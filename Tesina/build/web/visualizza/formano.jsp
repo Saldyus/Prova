@@ -10,7 +10,7 @@
         <meta name="keywords" content="" />
         <link rel="stylesheet" href="assets/css/main.css" />
     </head>
-    <body class="is-preload" onload="prova()">
+    <body class="is-preload">
         <%
             if (session.getAttribute("online") == null) {
                 response.sendRedirect("Login.jsp");
@@ -56,8 +56,12 @@
                                 <tr>
                                     <td>${forma.ID_Mappale}</td>
                                     <td>${forma.nome}</td>
-                                    <td><button type="button" class="btn btn-blue" onclick="mappale(${forma.ID_Mappale})">Mappale</button></td>
-                                    <td><button type="button" class="btn btn-blue" onclick="campo.jsp">Campi</button></td>
+                                    <td>
+                                        <form action="${pageContext.request.contextPath}/SeeMappaliServlet" method="POST">
+                                            <button type="submit" class="btn btn-blue" name="mappale" value="${forma.ID_Mappale}">Mappale</button>
+                                        </form>
+                                    </td>
+                                    <td><button type="button" class="btn btn-blue" onclick="visualizza()">Campi</button></td>
                                 </tr>
                             </c:forEach>
                         </tbody>
@@ -98,22 +102,8 @@
                 });
             }
             
-            function prova(){
-                console.log("caricamento");
-            }
-            
-            function mappale(ID){
-                $.ajax({
-                   type: 'POST',
-                   url: '${pageContext.request.contextPath}/seeMappaliServlet',
-                   data: 'ID='+ID,
-                   success: function (risposta){
-                   
-                   },    
-                   error: function (){
-                       alert("Chiamata fallita!!!");
-                   }
-                });
+            function visualizza(){
+                window.location.href = "visualizza/campo.jsp";
             }
         </script>
     </body>
